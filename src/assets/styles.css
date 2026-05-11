@@ -1,0 +1,64 @@
+:root {
+  --hrp-green: #2bbe7a;
+  --hrp-blue: #1e88e5;
+  --hrp-bg: #f7faf9;
+  --hrp-text: #1f2937;
+  --hrp-muted: #6b7280;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  color: var(--hrp-text);
+  background: var(--hrp-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--hrp-green);
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 0;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--hrp-green), var(--hrp-blue));
+  color: #fff;
+}
+
+.btn-outline {
+  background: #fff;
+  color: var(--hrp-text);
+  border: 1px solid #e5e7eb;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
