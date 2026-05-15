@@ -1,154 +1,146 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 
-const features = [
-  { icon: '🧠', title: 'AI 个性化计划', desc: '结合 DeepSeek / 豆包 / 通义千问，生成专属饮食、运动、用药方案。' },
-  { icon: '🩺', title: '报告自动识别', desc: '上传体检报告，OCR + 大模型抽取血压、血脂、血糖等关键指标。' },
-  { icon: '🔔', title: '智能提醒打卡', desc: '饮食、运动、用药、称重全流程提醒，打卡溯源，养成健康习惯。' },
-  { icon: '⌚', title: '可穿戴设备', desc: '兼容小米、华为、苹果、Google 等品牌，蓝牙 / SDK 自动采集数据。' },
-  { icon: '🔐', title: '端到端加密', desc: 'AES-256 加密，私钥仅存于您的设备，云端只见密文。' },
-  { icon: '📱', title: '多端覆盖', desc: 'macOS / iOS / Windows / Android / Web / 微信小程序。' }
+const valueCards = [
+  {
+    label: '01',
+    title: '个性化 7 天计划',
+    desc: '结合身高、体重、年龄、血压、血脂和用药信息，生成饮食、运动、提醒建议。'
+  },
+  {
+    label: '02',
+    title: '体检报告识别',
+    desc: '上传报告图片后自动提取关键指标，支持用户校对，减少手动录入负担。'
+  },
+  {
+    label: '03',
+    title: '提醒与打卡闭环',
+    desc: '覆盖饮食、运动、用药、称重，配合打卡记录形成可复盘的执行数据。'
+  },
+  {
+    label: '04',
+    title: '端到端加密同步',
+    desc: '敏感健康数据在客户端加密，主密钥由用户掌握，云端只保存密文。'
+  }
 ];
 
-const scenes = [
-  { title: '高血压人群', body: '盐分摄入、运动强度精准控制，按时用药与提醒，趋势可视化。' },
-  { title: '高血脂人群', body: '低脂高纤维饮食 + 有氧运动，AI 跟踪血脂四项变化。' },
-  { title: '肥胖人群', body: '热量缺口、营养比例科学配置，体重 / 体脂 / BMI 自动归档。' }
+const journey = [
+  '录入档案',
+  '识别报告',
+  '生成计划',
+  '提醒执行',
+  '打卡复盘'
+];
+
+const metrics = [
+  { value: '7 天', label: '饮食与运动计划周期' },
+  { value: '4 类', label: '饮食/运动/用药/称重提醒' },
+  { value: '5 端', label: '移动端、桌面端和 Web 覆盖' }
 ];
 </script>
 
 <template>
-  <section class="hero">
-    <div class="container">
-      <h1>让健康，从今天「重启」。</h1>
-      <p class="lead">针对三高与肥胖人群的 AI 智能健康管理平台。<br />个性化计划 · 智能提醒 · 设备联动 · 端到端加密。</p>
-      <div class="cta-row">
-        <RouterLink to="/app" class="btn btn-primary">进入 Web 版</RouterLink>
-        <RouterLink to="/download" class="btn btn-outline">下载客户端</RouterLink>
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="eyebrow">AI 健康管理 · 本地优先 · 端到端加密</div>
+      <h1>健康重启计划</h1>
+      <p class="hero-lead">
+        面向高血压、高血脂、糖尿病前期和体重管理人群，把健康档案、报告识别、AI 计划、提醒打卡和趋势复盘整合到一个可持续执行的工具里。
+      </p>
+      <div class="hero-actions">
+        <RouterLink to="/app" class="btn btn-primary">体验 Web 版</RouterLink>
+        <RouterLink to="/privacy" class="btn btn-secondary">了解加密机制</RouterLink>
+      </div>
+      <div class="trust-row" aria-label="平台能力摘要">
+        <span>本地优先</span>
+        <span>AES-256 加密</span>
+        <span>多端同步</span>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-label="健康重启计划产品场景">
+      <img src="/hero-health-dashboard.png" alt="平板健康数据看板、可穿戴手环和血压计组成的健康管理桌面场景" />
+      <div class="hero-insight-card">
+        <span>今日计划执行率</span>
+        <strong>82%</strong>
+      </div>
+      <div class="hero-privacy-card">
+        <strong>密文同步</strong>
+        <span>服务端不持有用户主密钥</span>
       </div>
     </div>
   </section>
 
-  <section class="features container">
-    <h2>核心能力</h2>
-    <div class="grid">
-      <div v-for="f in features" :key="f.title" class="card">
-        <div class="icon">{{ f.icon }}</div>
-        <h3>{{ f.title }}</h3>
-        <p>{{ f.desc }}</p>
+  <section class="section compact-section">
+    <div class="metric-grid">
+      <div v-for="metric in metrics" :key="metric.label" class="metric-item">
+        <strong>{{ metric.value }}</strong>
+        <span>{{ metric.label }}</span>
       </div>
     </div>
   </section>
 
-  <section class="scenes">
-    <div class="container">
-      <h2>典型场景</h2>
-      <div class="scene-row">
-        <div v-for="s in scenes" :key="s.title" class="scene">
-          <h3>{{ s.title }}</h3>
-          <p>{{ s.body }}</p>
-        </div>
+  <section class="section">
+    <div class="section-heading">
+      <span class="eyebrow">Core Capabilities</span>
+      <h2>把健康管理做成一条闭环</h2>
+      <p>不是简单记录，而是围绕真实指标持续生成计划、提醒执行、沉淀数据并支持后续调整。</p>
+    </div>
+    <div class="card-grid">
+      <article v-for="card in valueCards" :key="card.title" class="feature-card">
+        <span class="feature-mark">{{ card.label }}</span>
+        <h3>{{ card.title }}</h3>
+        <p>{{ card.desc }}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section flow-section">
+    <div class="section-heading">
+      <span class="eyebrow">Workflow</span>
+      <h2>五步完成一次健康节奏重启</h2>
+    </div>
+    <div class="journey">
+      <div v-for="(item, index) in journey" :key="item" class="journey-item">
+        <span>{{ String(index + 1).padStart(2, '0') }}</span>
+        <strong>{{ item }}</strong>
       </div>
     </div>
   </section>
 
-  <section class="privacy-cta container">
-    <div class="card highlight">
-      <h2>您的健康数据，只有您能看见。</h2>
-      <p>开通云同步时，客户端会生成 AES-256 主密钥，保存到您本机的 Keychain / Keystore。<br />服务端只见密文，连开发者也无法解密。</p>
-      <RouterLink to="/privacy" class="btn btn-primary">了解加密方案</RouterLink>
+  <section class="section split-section">
+    <div>
+      <span class="eyebrow">Privacy First</span>
+      <h2>健康数据默认属于用户本人</h2>
+      <p>
+        平台设计采用本地优先和端到端加密同步。开启云同步时，敏感字段会在客户端加密，服务端仅负责保存和同步密文。
+      </p>
+      <RouterLink to="/privacy" class="text-link">查看隐私与加密说明</RouterLink>
+    </div>
+    <div class="security-list">
+      <div>
+        <strong>AES-256-GCM</strong>
+        <span>健康档案、报告、打卡记录加密存储。</span>
+      </div>
+      <div>
+        <strong>Keychain / Keystore</strong>
+        <span>主密钥保存在用户设备安全区。</span>
+      </div>
+      <div>
+        <strong>用户可删除</strong>
+        <span>支持账号注销和云端数据删除流程。</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-section">
+    <div>
+      <h2>从 Web 版开始体验基础流程</h2>
+      <p>浏览器内即可完成指标输入、BMI 估算、计划预览和今日打卡演示。</p>
+    </div>
+    <div class="cta-actions">
+      <RouterLink to="/app" class="btn btn-primary">立即体验</RouterLink>
+      <RouterLink to="/download" class="btn btn-secondary">查看客户端下载</RouterLink>
     </div>
   </section>
 </template>
-
-<style scoped>
-.hero {
-  padding: 96px 0 64px;
-  background:
-    radial-gradient(1200px 600px at 20% -10%, rgba(43, 190, 122, 0.18), transparent 60%),
-    radial-gradient(1000px 600px at 100% 10%, rgba(30, 136, 229, 0.15), transparent 60%),
-    #fff;
-}
-.hero h1 {
-  font-size: 48px;
-  line-height: 1.1;
-  margin: 0 0 16px;
-}
-.hero .lead {
-  font-size: 18px;
-  color: var(--hrp-muted);
-}
-.cta-row {
-  display: flex;
-  gap: 12px;
-  margin-top: 32px;
-}
-.features {
-  padding: 80px 32px;
-}
-.features h2 {
-  font-size: 32px;
-  margin-bottom: 32px;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-}
-.card {
-  background: #fff;
-  padding: 24px;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
-}
-.card .icon {
-  font-size: 28px;
-  margin-bottom: 12px;
-}
-.card h3 {
-  margin: 0 0 8px;
-  font-size: 18px;
-}
-.card p {
-  color: var(--hrp-muted);
-  margin: 0;
-  line-height: 1.6;
-}
-.scenes {
-  background: #fff;
-  padding: 80px 0;
-}
-.scenes h2 {
-  font-size: 32px;
-  margin-bottom: 24px;
-}
-.scene-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-}
-.scene {
-  padding: 24px;
-  border-radius: 14px;
-  border: 1px solid #e5e7eb;
-}
-.scene h3 {
-  margin: 0 0 8px;
-  color: var(--hrp-green);
-}
-.privacy-cta {
-  padding: 64px 32px 96px;
-}
-.privacy-cta .card.highlight {
-  background: linear-gradient(135deg, rgba(43, 190, 122, 0.08), rgba(30, 136, 229, 0.08));
-  text-align: center;
-}
-.privacy-cta h2 {
-  margin: 0 0 12px;
-  font-size: 28px;
-}
-.privacy-cta p {
-  color: var(--hrp-muted);
-  margin: 0 0 24px;
-}
-</style>

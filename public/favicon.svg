@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="健康重启计划">
+  <rect width="64" height="64" rx="12" fill="#14332a"/>
+  <path d="M32 48c-8-6-18-13-18-24 0-6 5-10 11-10 3 0 6 2 7 4 1-2 4-4 7-4 6 0 11 4 11 10 0 11-10 18-18 24z" fill="#ffffff"/>
+  <path d="M20 31h8l3-8 5 16 3-8h5" fill="none" stroke="#21a67a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
