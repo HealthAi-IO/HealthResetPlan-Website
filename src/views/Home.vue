@@ -1,76 +1,75 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 
-const valueCards = [
-  {
-    label: '01',
-    title: '个性化 7 天计划',
-    desc: '结合身高、体重、年龄、血压、血脂和用药信息，生成饮食、运动、提醒建议。'
-  },
-  {
-    label: '02',
-    title: '体检报告识别',
-    desc: '上传报告图片后自动提取关键指标，支持用户校对，减少手动录入负担。'
-  },
-  {
-    label: '03',
-    title: '提醒与打卡闭环',
-    desc: '覆盖饮食、运动、用药、称重，配合打卡记录形成可复盘的执行数据。'
-  },
-  {
-    label: '04',
-    title: '端到端加密同步',
-    desc: '敏感健康数据在客户端加密，主密钥由用户掌握，云端只保存密文。'
-  }
-];
+const { t } = useI18n();
 
-const journey = [
-  '录入档案',
-  '识别报告',
-  '生成计划',
-  '提醒执行',
-  '打卡复盘'
-];
+const metrics = computed(() => [
+  { value: t('home.statsLabel1'), label: t('home.statsDesc1') },
+  { value: t('home.statsLabel2'), label: t('home.statsDesc2') },
+  { value: t('home.statsLabel3'), label: t('home.statsDesc3') },
+]);
 
-const metrics = [
-  { value: '7 天', label: '饮食与运动计划周期' },
-  { value: '4 类', label: '饮食/运动/用药/称重提醒' },
-  { value: '5 端', label: '移动端、桌面端和 Web 覆盖' }
-];
+const caps = computed(() => [
+  { num: '01', title: t('home.cap1Title'), desc: t('home.cap1Desc') },
+  { num: '02', title: t('home.cap2Title'), desc: t('home.cap2Desc') },
+  { num: '03', title: t('home.cap3Title'), desc: t('home.cap3Desc') },
+  { num: '04', title: t('home.cap4Title'), desc: t('home.cap4Desc') },
+]);
+
+const journey = computed(() => [
+  t('home.flow1'),
+  t('home.flow2'),
+  t('home.flow3'),
+  t('home.flow4'),
+  t('home.flow5'),
+]);
+
+const secItems = computed(() => [
+  { key: t('home.sec1'), desc: t('home.sec1Desc') },
+  { key: t('home.sec2'), desc: t('home.sec2Desc') },
+  { key: t('home.sec3'), desc: t('home.sec3Desc') },
+]);
 </script>
 
 <template>
+  <!-- Hero -->
   <section class="hero-section">
     <div class="hero-content">
-      <div class="eyebrow">AI 健康管理 · 本地优先 · 端到端加密</div>
-      <h1>健康重启计划</h1>
-      <p class="hero-lead">
-        面向高血压、高血脂、糖尿病前期和体重管理人群，把健康档案、报告识别、AI 计划、提醒打卡和趋势复盘整合到一个可持续执行的工具里。
-      </p>
+      <div class="eyebrow">{{ t('home.eyebrow') }}</div>
+      <h1>{{ t('home.hero') }}</h1>
+      <p class="hero-lead">{{ t('home.lead') }}</p>
       <div class="hero-actions">
-        <RouterLink to="/app" class="btn btn-primary">体验 Web 版</RouterLink>
-        <RouterLink to="/privacy" class="btn btn-secondary">了解加密机制</RouterLink>
+        <RouterLink to="/download" class="btn btn-primary">{{ t('home.ctaPrimary') }}</RouterLink>
+        <RouterLink to="/privacy" class="btn btn-secondary">{{ t('home.ctaSecondary') }}</RouterLink>
       </div>
-      <div class="trust-row" aria-label="平台能力摘要">
-        <span>本地优先</span>
-        <span>AES-256 加密</span>
-        <span>多端同步</span>
+      <div class="trust-row" aria-label="platform capabilities">
+        <span>{{ t('home.trust1') }}</span>
+        <span>{{ t('home.trust2') }}</span>
+        <span>{{ t('home.trust3') }}</span>
       </div>
     </div>
 
-    <div class="hero-visual" aria-label="健康重启计划产品场景">
-      <img src="/hero-health-dashboard.png" alt="平板健康数据看板、可穿戴手环和血压计组成的健康管理桌面场景" />
+    <div class="hero-visual" aria-label="product scene">
+      <img
+        src="/hero-health-dashboard.png"
+        :alt="t('home.heroDashboardAlt')"
+        class="hero-dashboard-img"
+        loading="eager"
+      />
       <div class="hero-insight-card">
-        <span>今日计划执行率</span>
+        <span>{{ t('home.todayRate') }}</span>
         <strong>82%</strong>
       </div>
       <div class="hero-privacy-card">
-        <strong>密文同步</strong>
-        <span>服务端不持有用户主密钥</span>
+        <strong>{{ t('home.cipherSync') }}</strong>
+        <span>{{ t('home.cipherDesc') }}</span>
       </div>
     </div>
   </section>
 
+  <!-- 统计指标条 -->
   <section class="section compact-section">
     <div class="metric-grid">
       <div v-for="metric in metrics" :key="metric.label" class="metric-item">
@@ -80,25 +79,38 @@ const metrics = [
     </div>
   </section>
 
+  <!-- 核心能力 -->
   <section class="section">
     <div class="section-heading">
-      <span class="eyebrow">Core Capabilities</span>
-      <h2>把健康管理做成一条闭环</h2>
-      <p>不是简单记录，而是围绕真实指标持续生成计划、提醒执行、沉淀数据并支持后续调整。</p>
+      <span class="eyebrow">{{ t('home.coreEyebrow') }}</span>
+      <h2>{{ t('home.coreTitle') }}</h2>
+      <p>{{ t('home.coreDesc') }}</p>
     </div>
     <div class="card-grid">
-      <article v-for="card in valueCards" :key="card.title" class="feature-card">
-        <span class="feature-mark">{{ card.label }}</span>
-        <h3>{{ card.title }}</h3>
-        <p>{{ card.desc }}</p>
+      <article v-for="cap in caps" :key="cap.num" class="feature-card">
+        <span class="feature-mark">{{ cap.num }}</span>
+        <h3>{{ cap.title }}</h3>
+        <p>{{ cap.desc }}</p>
       </article>
     </div>
   </section>
 
+  <!-- 产品场景展示横幅 -->
+  <section class="section showcase-section">
+    <div class="showcase-wrap">
+      <img
+        src="/poster-hero-2.png"
+        :alt="t('home.poster2Alt')"
+        loading="lazy"
+      />
+    </div>
+  </section>
+
+  <!-- 五步流程 -->
   <section class="section flow-section">
     <div class="section-heading">
-      <span class="eyebrow">Workflow</span>
-      <h2>五步完成一次健康节奏重启</h2>
+      <span class="eyebrow">{{ t('home.flowEyebrow') }}</span>
+      <h2>{{ t('home.flowTitle') }}</h2>
     </div>
     <div class="journey">
       <div v-for="(item, index) in journey" :key="item" class="journey-item">
@@ -108,39 +120,42 @@ const metrics = [
     </div>
   </section>
 
+  <!-- 跑步激励横幅 -->
+  <section class="section showcase-section">
+    <div class="showcase-wrap">
+      <img
+        src="/poster-hero-1.png"
+        :alt="t('home.poster1Alt')"
+        loading="lazy"
+      />
+    </div>
+  </section>
+
+  <!-- 隐私分栏 -->
   <section class="section split-section">
     <div>
-      <span class="eyebrow">Privacy First</span>
-      <h2>健康数据默认属于用户本人</h2>
-      <p>
-        平台设计采用本地优先和端到端加密同步。开启云同步时，敏感字段会在客户端加密，服务端仅负责保存和同步密文。
-      </p>
-      <RouterLink to="/privacy" class="text-link">查看隐私与加密说明</RouterLink>
+      <span class="eyebrow">{{ t('home.privacyEyebrow') }}</span>
+      <h2>{{ t('home.privacyTitle') }}</h2>
+      <p>{{ t('home.privacyDesc') }}</p>
+      <RouterLink to="/privacy" class="text-link">{{ t('home.privacyLink') }}</RouterLink>
     </div>
     <div class="security-list">
-      <div>
-        <strong>AES-256-GCM</strong>
-        <span>健康档案、报告、打卡记录加密存储。</span>
-      </div>
-      <div>
-        <strong>Keychain / Keystore</strong>
-        <span>主密钥保存在用户设备安全区。</span>
-      </div>
-      <div>
-        <strong>用户可删除</strong>
-        <span>支持账号注销和云端数据删除流程。</span>
+      <div v-for="item in secItems" :key="item.key">
+        <strong>{{ item.key }}</strong>
+        <span>{{ item.desc }}</span>
       </div>
     </div>
   </section>
 
+  <!-- CTA -->
   <section class="section cta-section">
     <div>
-      <h2>从 Web 版开始体验基础流程</h2>
-      <p>浏览器内即可完成指标输入、BMI 估算、计划预览和今日打卡演示。</p>
+      <h2>{{ t('home.ctaTitle') }}</h2>
+      <p>{{ t('home.ctaDesc') }}</p>
     </div>
     <div class="cta-actions">
-      <RouterLink to="/app" class="btn btn-primary">立即体验</RouterLink>
-      <RouterLink to="/download" class="btn btn-secondary">查看客户端下载</RouterLink>
+      <RouterLink to="/download" class="btn btn-primary">{{ t('home.ctaDownload') }}</RouterLink>
+      <RouterLink to="/app" class="btn btn-secondary">{{ t('home.ctaWeb') }}</RouterLink>
     </div>
   </section>
 </template>

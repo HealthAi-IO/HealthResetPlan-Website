@@ -1,42 +1,85 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-const platforms = [
-  { name: 'Android', code: 'APK', desc: '适配 API 24 及以上，支持华为、小米、OPPO、vivo 等主流机型。', status: '内测准备中' },
-  { name: 'iOS', code: 'iOS', desc: '适配 iOS 14 及以上，计划通过 TestFlight 开放测试。', status: '即将开放' },
-  { name: 'Windows', code: 'WIN', desc: '面向桌面复盘与长期数据查看，支持 Windows 10/11。', status: '规划中' },
-  { name: 'macOS', code: 'MAC', desc: '适配 Apple Silicon 与 Intel 设备，支持本地安全存储。', status: '规划中' },
-  { name: 'Web', code: 'WEB', desc: '无需安装，浏览器即可体验基础指标录入和计划预览。', status: '可体验' },
-  { name: '微信小程序', code: 'MP', desc: '适合轻量提醒、打卡和报告上传场景。', status: '规划中' }
-];
+const { t } = useI18n();
 
-const releaseSteps = [
-  '完成 Android 真机内测包与签名流程',
-  '完成隐私合规审查和应用市场资料',
-  '开放小范围邀请测试并收集反馈'
-];
+const platforms = computed(() => [
+  {
+    name: t('download.android'),
+    code: 'Android',
+    desc: t('download.androidDesc'),
+    status: t('download.androidStatus'),
+    available: true,
+  },
+  {
+    name: t('download.ios'),
+    code: 'iOS',
+    desc: t('download.iosDesc'),
+    status: t('download.iosStatus'),
+    available: false,
+  },
+  {
+    name: t('download.windows'),
+    code: 'Win',
+    desc: t('download.windowsDesc'),
+    status: t('download.windowsStatus'),
+    available: false,
+  },
+  {
+    name: t('download.macos'),
+    code: 'Mac',
+    desc: t('download.macosDesc'),
+    status: t('download.macosStatus'),
+    available: false,
+  },
+  {
+    name: t('download.web'),
+    code: 'Web',
+    desc: t('download.webDesc'),
+    status: t('download.webStatus'),
+    available: true,
+  },
+  {
+    name: t('download.mp'),
+    code: 'MP',
+    desc: t('download.mpDesc'),
+    status: t('download.mpStatus'),
+    available: false,
+  },
+]);
+
+const releaseSteps = computed(() => [
+  t('download.step1'),
+  t('download.step2'),
+  t('download.step3'),
+]);
 </script>
 
 <template>
   <section class="page-hero">
-    <span class="eyebrow">Download</span>
-    <h1>多端客户端下载</h1>
-    <p>当前官网提供 Web 版基础体验入口，移动端和桌面端安装包会随内测节奏逐步开放。</p>
+    <span class="eyebrow">{{ t('download.eyebrow') }}</span>
+    <h1>{{ t('download.title') }}</h1>
+    <p>{{ t('download.desc') }}</p>
     <div class="hero-actions">
-      <RouterLink to="/app" class="btn btn-primary">打开 Web 版</RouterLink>
-      <a class="btn btn-secondary" href="mailto:hello@jkcqplan.com?subject=申请健康重启计划内测">申请内测</a>
+      <a class="btn btn-primary" href="mailto:hello@jkcqplan.com?subject=Android Beta">
+        {{ t('download.ctaPrimary') }}
+      </a>
+      <a class="btn btn-secondary" href="mailto:hello@jkcqplan.com?subject=Beta Access">
+        {{ t('download.ctaSecondary') }}
+      </a>
     </div>
   </section>
 
   <section class="section">
     <div class="download-grid">
-      <article v-for="platform in platforms" :key="platform.name" class="download-card">
+      <article v-for="platform in platforms" :key="platform.code" class="download-card">
         <div class="platform-code">{{ platform.code }}</div>
-        <div>
+        <div class="platform-info">
           <h2>{{ platform.name }}</h2>
           <p>{{ platform.desc }}</p>
         </div>
-        <span class="status-pill" :class="{ available: platform.status === '可体验' }">
+        <span class="status-pill" :class="{ available: platform.available }">
           {{ platform.status }}
         </span>
       </article>
@@ -45,9 +88,9 @@ const releaseSteps = [
 
   <section class="section split-section">
     <div>
-      <span class="eyebrow">Release Plan</span>
-      <h2>发布节奏</h2>
-      <p>正式下载链接上线前，官网会优先承载产品说明、隐私合规说明和 Web 版基础体验。</p>
+      <span class="eyebrow">{{ t('download.planEyebrow') }}</span>
+      <h2>{{ t('download.planTitle') }}</h2>
+      <p>{{ t('download.planDesc') }}</p>
     </div>
     <ol class="timeline-list">
       <li v-for="step in releaseSteps" :key="step">{{ step }}</li>
