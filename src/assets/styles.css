@@ -1594,3 +1594,13 @@ html { scroll-behavior: smooth; }
   pointer-events: none;
 }
 .page-hero > * { position: relative; z-index: 1; }
+
+/* ── 图片预加载淡入效果 ───────────────────────────────────── */
+/* 下屏懒加载图片：加载完成前透明，加载完成后淡入 */
+.fade-in-img {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.fade-in-img.loaded {
+  opacity: 1;
+}

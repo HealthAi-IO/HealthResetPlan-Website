@@ -57,6 +57,8 @@ const secItems = computed(() => [
         :alt="t('home.heroDashboardAlt')"
         class="hero-dashboard-img"
         loading="eager"
+        fetchpriority="high"
+        decoding="async"
       />
       <div class="hero-insight-card">
         <span>{{ t('home.todayRate') }}</span>
@@ -102,6 +104,9 @@ const secItems = computed(() => [
         src="/poster-hero-2.png"
         :alt="t('home.poster2Alt')"
         loading="lazy"
+        decoding="async"
+        class="fade-in-img"
+        @load="(e) => (e.target as HTMLImageElement).classList.add('loaded')"
       />
     </div>
   </section>
@@ -127,6 +132,9 @@ const secItems = computed(() => [
         src="/poster-hero-1.png"
         :alt="t('home.poster1Alt')"
         loading="lazy"
+        decoding="async"
+        class="fade-in-img"
+        @load="(e) => (e.target as HTMLImageElement).classList.add('loaded')"
       />
     </div>
   </section>

@@ -11,9 +11,152 @@
     <meta property="og:url" content="https://jkcqplan.com/" />
     <title>健康重启计划 · AI 健康管理平台官网</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!--
+      ╔══════════════════════════════════════════════════════════╗
+      ║  图片预加载策略                                           ║
+      ║  preload  — HTML 解析阶段立即并行下载，不等 JS           ║
+      ║  prefetch — 空闲时预取下屏图片，下滑时已就绪            ║
+      ╚══════════════════════════════════════════════════════════╝
+    -->
+    <!-- 首屏 Hero 图：最高优先级，与 HTML 同步下载 -->
+    <link rel="preload" as="image" href="/hero-health-dashboard.png" fetchpriority="high" />
+    <!-- 下屏展示图：空闲时预取 -->
+    <link rel="prefetch" as="image" href="/poster-hero-2.png" />
+    <link rel="prefetch" as="image" href="/poster-hero-1.png" />
+
+    <!-- 骨架屏内联样式：JS 加载期间防止白屏 -->
+    <style>
+      *,*::before,*::after{box-sizing:border-box}
+      body{margin:0;background:#f5f8ff;font-family:system-ui,-apple-system,sans-serif}
+
+      /* ── 骨架屏容器 ── */
+      #app-skeleton{
+        position:fixed;inset:0;z-index:9999;
+        background:#f5f8ff;
+        display:flex;flex-direction:column;align-items:center;
+        padding:72px 24px 0;
+        transition:opacity .35s ease,visibility .35s ease;
+      }
+      #app-skeleton.fade-out{opacity:0;visibility:hidden}
+
+      /* Logo 占位 */
+      .sk-logo{
+        display:flex;align-items:center;gap:10px;margin-bottom:48px;
+      }
+      .sk-logo-mark{
+        width:36px;height:36px;border-radius:10px;
+        background:linear-gradient(135deg,#03a9f4,#0277bd);
+        display:flex;align-items:center;justify-content:center;
+        color:#fff;font-weight:800;font-size:14px;letter-spacing:-.5px;
+        flex-shrink:0;
+      }
+      .sk-logo-text{display:flex;flex-direction:column;line-height:1.2}
+      .sk-logo-text strong{font-size:15px;color:#1a1a2e;font-weight:700}
+      .sk-logo-text small{font-size:11px;color:#999}
+
+      /* Hero 区骨架 */
+      .sk-hero{
+        width:100%;max-width:1120px;
+        display:grid;grid-template-columns:1fr 1fr;gap:40px;
+        align-items:center;
+      }
+      @media(max-width:720px){.sk-hero{grid-template-columns:1fr}}
+
+      .sk-text-col{display:flex;flex-direction:column;gap:14px}
+      .sk-bar{border-radius:8px;background:linear-gradient(90deg,#e8edf5 25%,#d4dbe8 50%,#e8edf5 75%);background-size:200% 100%;animation:shimmer 1.4s infinite linear}
+      .sk-bar-sm{height:14px;width:60%}
+      .sk-bar-lg{height:40px;width:90%}
+      .sk-bar-md{height:18px;width:80%}
+      .sk-bar-md2{height:18px;width:65%}
+      .sk-btn-row{display:flex;gap:12px;margin-top:8px}
+      .sk-btn{height:44px;border-radius:10px;background:linear-gradient(90deg,#d0d8e8 25%,#bbc5d5 50%,#d0d8e8 75%);background-size:200% 100%;animation:shimmer 1.4s infinite linear}
+      .sk-btn-p{width:120px}
+      .sk-btn-s{width:100px}
+
+      .sk-img-col{position:relative}
+      .sk-img-box{
+        width:100%;aspect-ratio:4/3;border-radius:20px;overflow:hidden;
+        background:linear-gradient(90deg,#e0e8f5 25%,#c8d5e8 50%,#e0e8f5 75%);
+        background-size:200% 100%;animation:shimmer 1.4s infinite linear;
+      }
+      /* 一旦图片预加载完成，提前显示真实图片（骨架屏叠层下） */
+      .sk-img-real{
+        position:absolute;inset:0;border-radius:20px;
+        object-fit:cover;width:100%;height:100%;
+        opacity:0;transition:opacity .3s ease;
+      }
+      .sk-img-real.loaded{opacity:1}
+
+      @keyframes shimmer{to{background-position:-200% 0}}
+    </style>
   </head>
   <body>
+
+    <!-- 骨架屏：Vue 挂载前展示，提供即时视觉反馈 -->
+    <div id="app-skeleton" role="status" aria-label="页面加载中">
+      <div class="sk-logo">
+        <div class="sk-logo-mark">HR</div>
+        <div class="sk-logo-text">
+          <strong>健康重启计划</strong>
+          <small>HealthResetPlan</small>
+        </div>
+      </div>
+
+      <div class="sk-hero">
+        <!-- 文字骨架 -->
+        <div class="sk-text-col">
+          <div class="sk-bar sk-bar-sm"></div>
+          <div class="sk-bar sk-bar-lg"></div>
+          <div class="sk-bar sk-bar-lg" style="width:75%;height:32px"></div>
+          <div class="sk-bar sk-bar-md"></div>
+          <div class="sk-bar sk-bar-md2"></div>
+          <div class="sk-btn-row">
+            <div class="sk-bar sk-btn sk-btn-p"></div>
+            <div class="sk-bar sk-btn sk-btn-s"></div>
+          </div>
+        </div>
+
+        <!-- 图片骨架（同时展示已预加载的真实图） -->
+        <div class="sk-img-col">
+          <div class="sk-img-box"></div>
+          <img
+            id="sk-hero-img"
+            src="/hero-health-dashboard.png"
+            alt=""
+            aria-hidden="true"
+            class="sk-img-real"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </div>
+
     <div id="app"></div>
+
+    <!--
+      骨架屏控制脚本：
+      1. 图片加载完成 → 在骨架屏里显示真实图片（无缝过渡）
+      2. Vue 发出 app-ready 事件 → 淡出骨架屏
+    -->
+    <script>
+      (function () {
+        var img = document.getElementById('sk-hero-img');
+        if (img) {
+          var show = function () { img.classList.add('loaded'); };
+          img.complete ? show() : img.addEventListener('load', show);
+        }
+
+        window.removeAppSkeleton = function () {
+          var sk = document.getElementById('app-skeleton');
+          if (!sk) return;
+          sk.classList.add('fade-out');
+          setTimeout(function () { sk && sk.remove(); }, 400);
+        };
+      })();
+    </script>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue';
 import { RouterLink, RouterView, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { setLocale, type Locale } from './i18n';
@@ -44,7 +44,14 @@ function onDocClick(e: MouseEvent) {
   }
 }
 
-onMounted(() => document.addEventListener('click', onDocClick));
+onMounted(async () => {
+  document.addEventListener('click', onDocClick);
+  // Vue 完成首次渲染后移除骨架屏
+  await nextTick();
+  if (typeof (window as any).removeAppSkeleton === 'function') {
+    (window as any).removeAppSkeleton();
+  }
+});
 onUnmounted(() => document.removeEventListener('click', onDocClick));
 </script>
 
