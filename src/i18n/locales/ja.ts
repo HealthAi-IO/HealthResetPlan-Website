@@ -97,7 +97,6 @@ export default {
       { feature: 'クライアントサイド暗号化クラウド同期', free: false, paid: true },
       { feature: 'AIパーソナライズプラン（クラウド強化）', free: false, paid: true },
       { feature: '健診レポートOCR認識', free: false, paid: true },
-      { feature: 'Bluetoothデバイス連携', free: false, paid: true },
       { feature: 'マルチデバイスデータ同期', free: false, paid: true },
     ],
     detailEyebrow: '機能詳細',

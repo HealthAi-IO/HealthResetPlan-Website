@@ -97,7 +97,6 @@ export default {
       { feature: '클라이언트 측 암호화 클라우드 동기화', free: false, paid: true },
       { feature: 'AI 맞춤형 플랜 (클라우드 강화)', free: false, paid: true },
       { feature: '건강검진 리포트 OCR 인식', free: false, paid: true },
-      { feature: '블루투스 기기 연동', free: false, paid: true },
       { feature: '멀티 디바이스 데이터 동기화', free: false, paid: true },
     ],
     detailEyebrow: '기능 상세',
