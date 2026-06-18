@@ -23,6 +23,10 @@ body,
   margin: 0;
 }
 
+html {
+  overflow-x: clip;
+}
+
 body {
   color: var(--hrp-text);
   background:
@@ -30,6 +34,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: clip;
+  min-width: 320px;
 }
 
 p,
@@ -55,6 +61,11 @@ button,
 input,
 select {
   font: inherit;
+}
+
+img,
+svg {
+  max-width: 100%;
 }
 
 .app-shell {
@@ -1062,12 +1073,14 @@ select {
 /* ── 功能对比表格 ── */
 .compare-table-wrap {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   border-radius: 10px;
   border: 1px solid var(--hrp-line);
 }
 
 .compare-table {
   width: 100%;
+  min-width: 520px;
   border-collapse: collapse;
   background: #fff;
   font-size: 14px;
@@ -1218,6 +1231,7 @@ select {
   .site-header {
     grid-template-columns: 1fr auto;
     gap: 14px;
+    min-height: 64px;
   }
 
   .site-nav {
@@ -1247,8 +1261,19 @@ select {
     padding-top: 42px;
   }
 
+  .hero-content {
+    padding-left: 0;
+  }
+
   .hero-visual {
     min-height: auto;
+  }
+
+  .hero-dashboard-img {
+    height: auto;
+    min-height: 0;
+    max-height: 520px;
+    object-position: 62% top;
   }
 
   .hero-mock-screen {
@@ -1259,6 +1284,14 @@ select {
   .detail-card,
   .input-panel {
     grid-template-columns: 1fr;
+  }
+
+  .download-card {
+    align-items: stretch;
+  }
+
+  .status-pill {
+    justify-self: flex-start;
   }
 
   .webapp-header,
@@ -1285,6 +1318,15 @@ select {
     display: none;
   }
 
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  .brand-text strong {
+    font-size: 14px;
+  }
+
   .header-action {
     display: none;
   }
@@ -1294,19 +1336,54 @@ select {
   }
 
   .hero-content h1 {
-    font-size: 40px;
+    font-size: 34px;
+    line-height: 1.12;
+  }
+
+  .hero-lead,
+  .page-hero p,
+  .section-heading p,
+  .split-section p,
+  .cta-section p,
+  .webapp-header p,
+  .legal-lead,
+  .legal-page p {
+    font-size: 15px;
+    line-height: 1.72;
   }
 
   .page-hero h1,
   .webapp-header h1,
   .legal-page h1 {
-    font-size: 34px;
+    font-size: 30px;
     line-height: 1.16;
   }
 
+  .section-heading h2,
+  .split-section h2,
+  .cta-section h2,
+  .plan-preview h2,
+  .input-panel h2,
+  .recommend-card h2,
+  .panel-title h2,
+  .legal-page h2 {
+    font-size: 26px;
+  }
+
   .hero-actions .btn,
-  .cta-actions .btn {
+  .cta-actions .btn,
+  .pricing-btn {
     width: 100%;
+  }
+
+  .btn {
+    min-height: 44px;
+    padding: 0 16px;
+  }
+
+  .hero-dashboard-img {
+    max-height: 360px;
+    border-radius: 12px;
   }
 
   .hero-insight-card,
@@ -1317,14 +1394,64 @@ select {
 
   .cta-section {
     padding: 24px;
+    margin-bottom: 36px;
   }
 
   .task-button {
     grid-template-columns: 1fr;
+    gap: 8px;
   }
 
-  .mock-metric-row {
-    grid-template-columns: repeat(3, 1fr);
+  .metric-item,
+  .feature-card,
+  .detail-card,
+  .download-card,
+  .input-panel,
+  .summary-panel,
+  .plan-panel,
+  .todo-panel,
+  .security-list,
+  .pricing-card {
+    padding: 18px;
+  }
+
+  .mock-metric-row,
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-title {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .footer-links {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-header {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .header-right {
+    gap: 8px;
+  }
+
+  .lang-btn,
+  .hamburger {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .lang-btn .chevron {
+    display: none;
   }
 }
 

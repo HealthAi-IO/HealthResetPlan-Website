@@ -7,15 +7,26 @@ import { setLocale, type Locale } from './i18n';
 const { t, locale } = useI18n();
 const router = useRouter();
 
+const currentYear = new Date().getFullYear();
+const menuOpen = ref(false);
+const langOpen = ref(false);
+const langSwitcherEl = ref<HTMLElement | null>(null);
+
 watch(locale, () => {
   const key = router.currentRoute.value.meta.titleKey as string | undefined;
   if (key) document.title = t(key);
 });
 
-const currentYear = new Date().getFullYear();
-const menuOpen = ref(false);
-const langOpen = ref(false);
-const langSwitcherEl = ref<HTMLElement | null>(null);
+watch(
+  () => router.currentRoute.value.fullPath,
+  () => {
+    menuOpen.value = false;
+  }
+);
+
+watch(menuOpen, open => {
+  document.body.style.overflow = open ? 'hidden' : '';
+});
 
 const localeOptions: { code: Locale; label: string }[] = [
   { code: 'zh-CN', label: '简体中文' },
@@ -52,7 +63,10 @@ onMounted(async () => {
     (window as any).removeAppSkeleton();
   }
 });
-onUnmounted(() => document.removeEventListener('click', onDocClick));
+onUnmounted(() => {
+  document.removeEventListener('click', onDocClick);
+  document.body.style.overflow = '';
+});
 </script>
 
 <template>
