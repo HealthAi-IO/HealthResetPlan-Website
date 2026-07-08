@@ -30,7 +30,7 @@ const { t } = useI18n();
 
     <section>
       <h2>{{ t('terms.s4Title') }}</h2>
-      <p>{{ t('terms.s4p1', { email: 'hello@jkcqplan.com' }) }}</p>
+      <p>{{ t('terms.s4p1', { email: '87103978@qq.com' }) }}</p>
     </section>
 
     <p class="legal-footer">{{ t('terms.updated') }}</p>

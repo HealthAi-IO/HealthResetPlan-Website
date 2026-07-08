@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue';
+import { ref, computed, watch, onMounted, onUnmounted, nextTick, defineAsyncComponent } from 'vue';
 import { RouterLink, RouterView, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { setLocale, type Locale } from './i18n';
 
 const { t, locale } = useI18n();
 const router = useRouter();
+const ThreeHealthScene = defineAsyncComponent(() => import('@/components/ThreeHealthScene.vue'));
 
 const currentYear = new Date().getFullYear();
 const menuOpen = ref(false);
@@ -40,6 +41,14 @@ const currentLangLabel = computed(
   () => localeOptions.find(o => o.code === locale.value)?.label ?? locale.value
 );
 
+const sceneVariant = computed(() => {
+  const name = router.currentRoute.value.name;
+  if (name === 'features') return 'features';
+  if (name === 'download') return 'download';
+  if (name === 'privacy') return 'privacy';
+  return 'home';
+});
+
 function switchLocale(code: Locale) {
   setLocale(code);
   langOpen.value = false;
@@ -71,6 +80,8 @@ onUnmounted(() => {
 
 <template>
   <div class="app-shell">
+    <ThreeHealthScene full-screen :variant="sceneVariant" />
+
     <header class="site-header">
       <RouterLink to="/" class="brand" :aria-label="t('nav.home')">
         <span class="brand-mark">HR</span>
@@ -118,7 +129,7 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <RouterLink to="/app" class="header-action">{{ t('nav.webApp') }}</RouterLink>
+        <a href="https://app.jkcqplan.com/" class="header-action">{{ t('nav.webApp') }}</a>
 
         <button
           class="hamburger"
@@ -140,7 +151,7 @@ onUnmounted(() => {
           <RouterLink to="/download" @click="closeMobileMenu">{{ t('nav.download') }}</RouterLink>
           <RouterLink to="/privacy" @click="closeMobileMenu">{{ t('nav.privacy') }}</RouterLink>
           <RouterLink to="/terms" @click="closeMobileMenu">{{ t('nav.terms') }}</RouterLink>
-          <RouterLink to="/app" class="mobile-cta" @click="closeMobileMenu">{{ t('nav.webApp') }}</RouterLink>
+          <a href="https://app.jkcqplan.com/" class="mobile-cta" @click="closeMobileMenu">{{ t('nav.webApp') }}</a>
           <div class="mobile-lang">
             <button
               v-for="opt in localeOptions"
@@ -173,7 +184,7 @@ onUnmounted(() => {
           <RouterLink to="/download">{{ t('footer.download') }}</RouterLink>
           <RouterLink to="/privacy">{{ t('footer.privacy') }}</RouterLink>
           <RouterLink to="/terms">{{ t('footer.terms') }}</RouterLink>
-          <a href="mailto:hello@jkcqplan.com">{{ t('footer.contact') }}</a>
+          <a href="mailto:87103978@qq.com">{{ t('footer.contact') }}</a>
         </div>
       </div>
       <div class="footer-bottom">

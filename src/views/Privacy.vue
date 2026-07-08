@@ -40,6 +40,6 @@ const { t } = useI18n();
       <p>{{ t('privacy.s4p1') }}</p>
     </section>
 
-    <p class="legal-footer">{{ t('privacy.updated', { email: 'hello@jkcqplan.com' }) }}</p>
+    <p class="legal-footer">{{ t('privacy.updated', { email: '87103978@qq.com' }) }}</p>
   </article>
 </template>

@@ -62,10 +62,10 @@ const releaseSteps = computed(() => [
     <h1>{{ t('download.title') }}</h1>
     <p>{{ t('download.desc') }}</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="mailto:hello@jkcqplan.com?subject=Android Beta">
+      <a class="btn btn-primary" href="mailto:87103978@qq.com?subject=Android Beta">
         {{ t('download.ctaPrimary') }}
       </a>
-      <a class="btn btn-secondary" href="mailto:hello@jkcqplan.com?subject=Beta Access">
+      <a class="btn btn-secondary" href="mailto:87103978@qq.com?subject=Beta Access">
         {{ t('download.ctaSecondary') }}
       </a>
     </div>

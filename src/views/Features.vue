@@ -48,8 +48,8 @@ const scenarios = computed(() => [
     <p>{{ t('features.desc') }}</p>
   </section>
 
-  <!-- 免费/付费对比表 -->
-  <section class="section pricing-section">
+  <!-- 暂不展示 VIP/付费对比，当前阶段面向用户免费开放。 -->
+  <section v-if="false" class="section pricing-section">
     <div class="section-heading">
       <h2>{{ t('features.pricingTitle') }}</h2>
       <p>{{ t('features.pricingDesc') }}</p>
@@ -69,7 +69,7 @@ const scenarios = computed(() => [
         <div class="pricing-tier-label">{{ t('features.paid') }}</div>
         <div class="pricing-price">{{ t('features.paidPrice') }}</div>
         <p class="pricing-desc">{{ t('features.paidDesc') }}</p>
-        <a href="mailto:hello@jkcqplan.com?subject=Pro" class="btn btn-primary pricing-btn">{{ t('features.paidCta') }}</a>
+        <a href="mailto:87103978@qq.com?subject=Pro" class="btn btn-primary pricing-btn">{{ t('features.paidCta') }}</a>
       </div>
     </div>
 
