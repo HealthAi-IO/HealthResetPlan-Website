@@ -1,0 +1,8 @@
+/lottie/*.json
+  Cache-Control: public, max-age=31536000, immutable
+
+/FinalBaseMesh.obj
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
