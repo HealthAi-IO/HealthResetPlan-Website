@@ -7,7 +7,6 @@ import LazyThreeHealthScene from '@/components/LazyThreeHealthScene.vue';
 
 const { t, locale } = useI18n();
 const router = useRouter();
-const currentYear = new Date().getFullYear();
 const menuOpen = ref(false);
 const langOpen = ref(false);
 const langSwitcherEl = ref<HTMLElement | null>(null);
@@ -205,7 +204,8 @@ onUnmounted(() => {
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© {{ currentYear }} HealthResetPlan</span>
+        <span>{{ t('footer.copyright') }}</span>
+        <span>{{ t('footer.record') }}</span>
         <span>{{ t('footer.disclaimer') }}</span>
       </div>
     </footer>

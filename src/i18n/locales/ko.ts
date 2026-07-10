@@ -14,6 +14,8 @@ export default {
     privacy: '개인정보 처리방침',
     terms: '이용약관',
     contact: '문의하기',
+    copyright: '© 2025 베이징 웨이링지 테크놀로지 유한회사 All Rights Reserved.',
+    record: 'HealthResetPlan ICP 등록번호: 京ICP备2026004138号-4',
     disclaimer: '건강 제안은 일상 관리 보조 목적이며 의사 진료를 대체하지 않습니다.',
   },
   home: {

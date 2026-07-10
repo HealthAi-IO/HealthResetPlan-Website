@@ -14,6 +14,8 @@ export default {
     privacy: '隱私政策',
     terms: '使用者協議',
     contact: '聯絡我們',
+    copyright: '© 2025 北京微零記科技有限公司 All Rights Reserved.',
+    record: '健康重啟計畫備案號：京ICP備2026004138號-4',
     disclaimer: '健康建議僅用於日常管理輔助，不能替代醫生診療。',
   },
   home: {

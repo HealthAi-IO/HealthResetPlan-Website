@@ -14,6 +14,8 @@ export default {
     privacy: '隐私政策',
     terms: '用户协议',
     contact: '联系我们',
+    copyright: '© 2025 北京微零记科技有限公司 All Rights Reserved.',
+    record: '健康重启计划备案号：京ICP备2026004138号-4',
     disclaimer: '健康建议仅用于日常管理辅助，不能替代医生诊疗。',
   },
   home: {

@@ -14,6 +14,8 @@ export default {
     privacy: 'Privacy Policy',
     terms: 'Terms of Service',
     contact: 'Contact Us',
+    copyright: '© 2025 Beijing Weilingji Technology Co., Ltd. All Rights Reserved.',
+    record: 'HealthResetPlan ICP filing: 京ICP备2026004138号-4',
     disclaimer: 'Health suggestions are for daily management only and do not replace medical advice.',
   },
   home: {

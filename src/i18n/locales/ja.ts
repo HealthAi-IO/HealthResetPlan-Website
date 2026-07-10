@@ -14,6 +14,8 @@ export default {
     privacy: 'プライバシーポリシー',
     terms: '利用規約',
     contact: 'お問い合わせ',
+    copyright: '© 2025 北京微零記科技有限公司 All Rights Reserved.',
+    record: 'HealthResetPlan ICP登録番号：京ICP备2026004138号-4',
     disclaimer: '健康アドバイスは日常管理の補助であり、医師の診療に代わるものではありません。',
   },
   home: {
