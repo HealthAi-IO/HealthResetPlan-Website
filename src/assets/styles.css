@@ -1373,10 +1373,6 @@ svg {
     display: none;
   }
 
-  .theme-toggle {
-    display: none;
-  }
-
   .lang-btn span:not(.chevron) {
     display: none;
   }

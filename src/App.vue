@@ -10,7 +10,9 @@ const router = useRouter();
 const menuOpen = ref(false);
 const langOpen = ref(false);
 const langSwitcherEl = ref<HTMLElement | null>(null);
-const themeMode = ref<'day' | 'night'>('day');
+const themeMode = ref<'day' | 'night'>(
+  localStorage.getItem('hrp-theme-mode') === 'night' ? 'night' : 'day'
+);
 const isDayMode = computed(() => themeMode.value === 'day');
 provide('themeMode', themeMode);
 
@@ -35,7 +37,7 @@ watch(
   mode => {
     document.body.classList.toggle('theme-day', mode === 'day');
     document.body.classList.toggle('theme-night', mode === 'night');
-    localStorage.setItem('hrp-theme-mode', 'day');
+    localStorage.setItem('hrp-theme-mode', mode);
   },
   { immediate: true }
 );
@@ -143,8 +145,21 @@ onUnmounted(() => {
 
         <a href="https://app.jkcqplan.com/" class="header-action">{{ t('nav.webApp') }}</a>
 
-        <button class="theme-toggle" type="button" @click="toggleThemeMode">
-          {{ isDayMode ? '黑夜模式' : '白天模式' }}
+        <button
+          class="theme-toggle"
+          type="button"
+          :aria-label="isDayMode ? '切换至黑夜模式' : '切换至白天模式'"
+          :title="isDayMode ? '黑夜模式' : '白天模式'"
+          @click="toggleThemeMode"
+        >
+          <svg v-if="isDayMode" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.4 15.3A8.5 8.5 0 0 1 8.7 3.6 8.5 8.5 0 1 0 20.4 15.3Z" />
+          </svg>
+          <svg v-else viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+          </svg>
+          <span>{{ isDayMode ? '黑夜模式' : '白天模式' }}</span>
         </button>
 
         <button
@@ -215,6 +230,10 @@ onUnmounted(() => {
 <style lang="less" scoped>
 .theme-toggle {
   min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   padding: 0 16px;
   color: #3a4240;
   background: rgba(255, 249, 240, 0.92);
@@ -223,6 +242,16 @@ onUnmounted(() => {
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 10px 28px rgba(143, 211, 185, 0.14);
+
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+  }
 }
 
 :global(#app),
@@ -304,7 +333,13 @@ onUnmounted(() => {
 
 @media (max-width: 560px) {
   .theme-toggle {
-    display: none;
+    width: 36px;
+    min-height: 36px;
+    padding: 0;
+
+    span {
+      display: none;
+    }
   }
 }
 </style>

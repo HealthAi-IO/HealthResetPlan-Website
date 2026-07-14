@@ -33,6 +33,13 @@ const detailGroups = computed(() => [
   },
 ]);
 
+const adminFeatures = computed(() => [
+  { title: t('features.admin1Title'), desc: t('features.admin1Desc') },
+  { title: t('features.admin2Title'), desc: t('features.admin2Desc') },
+  { title: t('features.admin3Title'), desc: t('features.admin3Desc') },
+  { title: t('features.admin4Title'), desc: t('features.admin4Desc') },
+]);
+
 const scenarios = computed(() => [
   { title: t('features.s1Title'), desc: t('features.s1Desc') },
   { title: t('features.s2Title'), desc: t('features.s2Desc') },
@@ -115,6 +122,21 @@ const scenarios = computed(() => [
         </ul>
       </div>
     </article>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <span class="eyebrow">{{ t('features.adminEyebrow') }}</span>
+      <h2>{{ t('features.adminTitle') }}</h2>
+      <p>{{ t('features.adminDesc') }}</p>
+    </div>
+    <div class="card-grid">
+      <article v-for="item in adminFeatures" :key="item.title" class="feature-card">
+        <span class="feature-mark">▸</span>
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.desc }}</p>
+      </article>
+    </div>
   </section>
 
   <!-- 场景卡片 -->

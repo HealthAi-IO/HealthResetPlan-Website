@@ -1,38 +1,34 @@
-<script setup lang="ts">
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-</script>
-
 <template>
   <article class="legal-page">
-    <span class="eyebrow">{{ t('terms.eyebrow') }}</span>
-    <h1>{{ t('terms.title') }}</h1>
-    <p class="legal-lead">{{ t('terms.lead') }}</p>
+    <span class="eyebrow">用户协议</span>
+    <h1>健康重启计划用户协议</h1>
+    <p class="legal-lead">生效日期：2026 年 7 月 14 日</p>
 
     <section>
-      <h2>{{ t('terms.s1Title') }}</h2>
-      <p>{{ t('terms.s1p1') }}</p>
+      <h2>一、协议主体与服务</h2>
+      <p>本协议由你与北京微零记科技有限公司共同订立。健康重启计划提供健康档案记录、指标管理、饮食运动计划、提醒打卡、统计、账号同步和 AI 辅助分析等健康管理工具。你使用本服务即表示同意本协议及《隐私政策》。</p>
     </section>
 
     <section>
-      <h2>{{ t('terms.s2Title') }}</h2>
+      <h2>二、账号与数据</h2>
       <ul class="check-list">
-        <li>{{ t('terms.s2p1') }}</li>
-        <li>{{ t('terms.s2p2') }}</li>
-        <li>{{ t('terms.s2p3') }}</li>
+        <li>你可选择仅本地使用，也可注册账号使用云同步和在线能力。请提供真实、合法的信息并妥善保管账号、密码、验证码和助记词。</li>
+        <li>你对录入的健康、用药、饮食和运动信息的真实性负责。因设备丢失、未备份助记词或不当操作导致的数据损失，我们将在法律要求范围内提供协助。</li>
+        <li>你可在应用内注销账号。注销后，云端数据保留 30 天以支持恢复，期满后删除。</li>
       </ul>
     </section>
 
     <section>
-      <h2>{{ t('terms.s3Title') }}</h2>
-      <p>{{ t('terms.s3p1') }}</p>
+      <h2>三、健康提示与使用限制</h2>
+      <p>本服务是日常健康管理辅助工具，不提供医疗诊断、处方、急救或治疗服务，也不替代医生、药师或其他专业医疗人员的建议。AI 生成内容和报告识别结果仅供参考。出现不适、异常指标、疾病诊断、特殊用药或运动禁忌时，请及时咨询专业医疗人员。</p>
+      <p>你不得利用本服务发布违法信息、侵犯他人权益、攻击系统、绕过安全措施，或将服务用于任何违反法律法规的用途。</p>
     </section>
 
     <section>
-      <h2>{{ t('terms.s4Title') }}</h2>
-      <p>{{ t('terms.s4p1', { email: '87103978@qq.com' }) }}</p>
+      <h2>四、服务变更、终止与联系</h2>
+      <p>我们可能因产品迭代、安全维护或法律要求调整功能，并会以合理方式通知你。你可随时停止使用服务并按应用内路径处理数据。对本协议或服务有疑问，请联系：87103978@qq.com，电话：13436574850，地址：北京市大兴区荣华街道亦庄经济开发区宏达南路 5 号宏达利德 A 座 303。</p>
     </section>
 
-    <p class="legal-footer">{{ t('terms.updated') }}</p>
+    <p class="legal-footer">北京微零记科技有限公司</p>
   </article>
 </template>
