@@ -1,16 +1,61 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { http } from '@/utils/http';
 
 const { t } = useI18n();
 
-const platforms = computed(() => [
+interface ReleaseInfo {
+  available: boolean;
+  version?: string;
+  sizeMb?: number;
+  downloadUrl?: string;
+  updatedAt?: string;
+}
+
+interface PlatformCard {
+  name: string;
+  code: string;
+  desc: string;
+  status: string;
+  available: boolean;
+  downloadUrl?: string;
+  downloadLabel?: string;
+}
+
+const androidRelease = ref<ReleaseInfo | null>(null);
+const windowsRelease = ref<ReleaseInfo | null>(null);
+const androidReleaseLoading = ref(true);
+const windowsReleaseLoading = ref(true);
+
+onMounted(async () => {
+  const [android, windows] = await Promise.all([
+    http
+      .get<ReleaseInfo>('/releases/latest?platform=android&channel=official')
+      .catch(() => null),
+    http
+      .get<ReleaseInfo>('/releases/latest?platform=windows&channel=official')
+      .catch(() => null),
+  ]);
+  androidRelease.value = android;
+  windowsRelease.value = windows;
+  androidReleaseLoading.value = false;
+  windowsReleaseLoading.value = false;
+});
+
+const platforms = computed<PlatformCard[]>(() => [
   {
     name: t('download.android'),
     code: 'Android',
     desc: t('download.androidDesc'),
-    status: t('download.androidStatus'),
-    available: true,
+    status: androidReleaseLoading.value
+      ? t('download.loading')
+      : androidRelease.value?.available
+        ? `v${androidRelease.value.version} · ${androidRelease.value.sizeMb} MB`
+        : t('download.androidStatus'),
+    available: androidRelease.value?.available === true,
+    downloadUrl: androidRelease.value?.downloadUrl,
+    downloadLabel: t('download.downloadAndroid'),
   },
   {
     name: t('download.ios'),
@@ -23,8 +68,14 @@ const platforms = computed(() => [
     name: t('download.windows'),
     code: 'Win',
     desc: t('download.windowsDesc'),
-    status: t('download.windowsStatus'),
-    available: false,
+    status: windowsReleaseLoading.value
+      ? t('download.loading')
+      : windowsRelease.value?.available
+        ? `v${windowsRelease.value.version} · ${windowsRelease.value.sizeMb} MB`
+        : t('download.windowsStatus'),
+    available: windowsRelease.value?.available === true,
+    downloadUrl: windowsRelease.value?.downloadUrl,
+    downloadLabel: t('download.downloadWindows'),
   },
   {
     name: t('download.macos'),
@@ -57,68 +108,77 @@ const releaseSteps = computed(() => [
 </script>
 
 <template>
-  <section class="page-hero download-hero">
-    <div class="download-hero-copy">
-      <span class="eyebrow">{{ t('download.eyebrow') }}</span>
-      <h1>{{ t('download.title') }}</h1>
-      <p>{{ t('download.desc') }}</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="mailto:87103978@qq.com?subject=Android Beta">
-          {{ t('download.ctaPrimary') }}
-        </a>
-        <a class="btn btn-secondary" href="mailto:87103978@qq.com?subject=Beta Access">
-          {{ t('download.ctaSecondary') }}
-        </a>
-      </div>
-    </div>
-
-    <div class="download-hero-art" aria-label="客户端下载插画">
-      <div class="art-phone">
-        <span class="phone-speaker"></span>
-        <div class="download-icon">
-          <span></span>
+  <main class="page">
+    <section class="page-hero download-hero">
+      <div class="download-hero-copy">
+        <span class="eyebrow">{{ t('download.eyebrow') }}</span>
+        <h1>{{ t('download.title') }}</h1>
+        <p>{{ t('download.desc') }}</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="mailto:87103978@qq.com?subject=Android Beta">
+            {{ t('download.ctaPrimary') }}
+          </a>
+          <a class="btn btn-secondary" href="mailto:87103978@qq.com?subject=Beta Access">
+            {{ t('download.ctaSecondary') }}
+          </a>
         </div>
-        <strong>Android</strong>
-        <small>健康数据随手记录</small>
       </div>
-      <div class="art-card art-card-left">
-        <span>Web</span>
-        <strong>趋势复盘</strong>
-      </div>
-      <div class="art-card art-card-right">
-        <span>7天</span>
-        <strong>养护方案</strong>
-      </div>
-      <div class="art-leaf leaf-one"></div>
-      <div class="art-leaf leaf-two"></div>
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="download-grid">
-      <article v-for="platform in platforms" :key="platform.code" class="download-card">
-        <div class="platform-code">{{ platform.code }}</div>
-        <div class="platform-info">
-          <h2>{{ platform.name }}</h2>
-          <p>{{ platform.desc }}</p>
+      <div class="download-hero-art" aria-label="客户端下载插画">
+        <div class="art-phone">
+          <span class="phone-speaker"></span>
+          <div class="download-icon">
+            <span></span>
+          </div>
+          <strong>Android</strong>
+          <small>健康数据随手记录</small>
         </div>
-        <span class="status-pill" :class="{ available: platform.available }">
-          {{ platform.status }}
-        </span>
-      </article>
-    </div>
-  </section>
+        <div class="art-card art-card-left">
+          <span>Web</span>
+          <strong>趋势复盘</strong>
+        </div>
+        <div class="art-card art-card-right">
+          <span>7天</span>
+          <strong>养护方案</strong>
+        </div>
+        <div class="art-leaf leaf-one"></div>
+        <div class="art-leaf leaf-two"></div>
+      </div>
+    </section>
 
-  <section class="section split-section">
-    <div>
-      <span class="eyebrow">{{ t('download.planEyebrow') }}</span>
-      <h2>{{ t('download.planTitle') }}</h2>
-      <p>{{ t('download.planDesc') }}</p>
-    </div>
-    <ol class="timeline-list">
-      <li v-for="step in releaseSteps" :key="step">{{ step }}</li>
-    </ol>
-  </section>
+    <section class="section">
+      <div class="download-grid">
+        <article v-for="platform in platforms" :key="platform.code" class="download-card">
+          <div class="platform-code">{{ platform.code }}</div>
+          <div class="platform-info">
+            <h2>{{ platform.name }}</h2>
+            <p>{{ platform.desc }}</p>
+          </div>
+          <a
+            v-if="platform.downloadUrl"
+            class="btn btn-primary download-button"
+            :href="platform.downloadUrl"
+          >
+            {{ platform.downloadLabel }}
+          </a>
+          <span class="status-pill" :class="{ available: platform.available }">
+            {{ platform.status }}
+          </span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section split-section">
+      <div>
+        <span class="eyebrow">{{ t('download.planEyebrow') }}</span>
+        <h2>{{ t('download.planTitle') }}</h2>
+        <p>{{ t('download.planDesc') }}</p>
+      </div>
+      <ol class="timeline-list">
+        <li v-for="step in releaseSteps" :key="step">{{ step }}</li>
+      </ol>
+    </section>
+  </main>
 </template>
 
 <style lang="less" scoped>
@@ -133,6 +193,12 @@ const releaseSteps = computed(() => [
 
 .download-hero-copy {
   max-width: 620px;
+}
+
+.download-button {
+  grid-column: 1 / -1;
+  justify-self: flex-start;
+  white-space: nowrap;
 }
 
 .download-hero-art {
