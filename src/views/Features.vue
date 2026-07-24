@@ -2,9 +2,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-const { t, tm } = useI18n();
-
-const rows = computed(() => tm('features.rows') as { feature: string; free: boolean; paid: boolean }[]);
+const { t } = useI18n();
 
 const detailGroups = computed(() => [
   {
@@ -53,58 +51,6 @@ const scenarios = computed(() => [
     <span class="eyebrow">{{ t('features.eyebrow') }}</span>
     <h1>{{ t('features.title') }}</h1>
     <p>{{ t('features.desc') }}</p>
-  </section>
-
-  <!-- 暂不展示 VIP/付费对比，当前阶段面向用户免费开放。 -->
-  <section v-if="false" class="section pricing-section">
-    <div class="section-heading">
-      <h2>{{ t('features.pricingTitle') }}</h2>
-      <p>{{ t('features.pricingDesc') }}</p>
-    </div>
-
-    <div class="pricing-grid">
-      <!-- 免费版卡片 -->
-      <div class="pricing-card">
-        <div class="pricing-tier-label">{{ t('features.free') }}</div>
-        <div class="pricing-price">{{ t('features.freePrice') }}</div>
-        <p class="pricing-desc">{{ t('features.freeDesc') }}</p>
-        <a href="/download" class="btn btn-secondary pricing-btn">{{ t('features.freeCta') }}</a>
-      </div>
-
-      <!-- 付费版卡片 -->
-      <div class="pricing-card pricing-card--pro">
-        <div class="pricing-tier-label">{{ t('features.paid') }}</div>
-        <div class="pricing-price">{{ t('features.paidPrice') }}</div>
-        <p class="pricing-desc">{{ t('features.paidDesc') }}</p>
-        <a href="mailto:87103978@qq.com?subject=Pro" class="btn btn-primary pricing-btn">{{ t('features.paidCta') }}</a>
-      </div>
-    </div>
-
-    <!-- 功能对比表格 -->
-    <div class="compare-table-wrap">
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th></th>
-            <th>{{ t('features.free') }}</th>
-            <th>{{ t('features.paid') }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="row in rows" :key="row.feature">
-            <td>{{ row.feature }}</td>
-            <td>
-              <span v-if="row.free" class="check-icon" aria-label="included">✓</span>
-              <span v-else class="dash-icon" aria-label="not included">—</span>
-            </td>
-            <td>
-              <span v-if="row.paid" class="check-icon" aria-label="included">✓</span>
-              <span v-else class="dash-icon" aria-label="not included">—</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </section>
 
   <!-- 功能详情 -->
