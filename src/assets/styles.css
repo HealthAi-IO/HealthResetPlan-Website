@@ -31,7 +31,7 @@ body {
   color: var(--hrp-text);
   background:
     linear-gradient(180deg, rgba(225, 245, 254, 0.68) 0%, #fff 44%, #f5faff 100%);
-  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  font-family: 'Noto Sans SC Variable', 'Noto Sans SC', sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: clip;

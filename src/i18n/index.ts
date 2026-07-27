@@ -4,6 +4,7 @@ import zhTW from './locales/zh-TW'
 import en from './locales/en'
 import ja from './locales/ja'
 import ko from './locales/ko'
+import { legalMessages } from './legal'
 
 export type Locale = 'zh-CN' | 'zh-TW' | 'en' | 'ja' | 'ko'
 
@@ -20,16 +21,19 @@ function detectLocale(): Locale {
   return 'en'
 }
 
+const initialLocale = detectLocale()
+document.documentElement.lang = initialLocale
+
 export const i18n = createI18n({
   legacy: false,
-  locale: detectLocale(),
+  locale: initialLocale,
   fallbackLocale: 'en',
   messages: {
-    'zh-CN': zhCN,
-    'zh-TW': zhTW,
-    en,
-    ja,
-    ko,
+    'zh-CN': { ...zhCN, ...legalMessages['zh-CN'] },
+    'zh-TW': { ...zhTW, ...legalMessages['zh-TW'] },
+    en: { ...en, ...legalMessages.en },
+    ja: { ...ja, ...legalMessages.ja },
+    ko: { ...ko, ...legalMessages.ko },
   },
 })
 
