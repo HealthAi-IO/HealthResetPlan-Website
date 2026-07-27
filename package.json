@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build && node scripts/prepare-sites.mjs",
+    "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview --port 5050",
     "lint": "eslint . --ext .ts,.vue,.js --max-warnings 0"
   },
