@@ -181,7 +181,7 @@ const flowStepsMap = {
 
 const privacyItemsMap = {
   'zh-CN': [
-    { title: '本地存储', desc: '健康数据先保存在自己的设备中' },
+    { title: '在线存储', desc: '登录后健康数据自动安全保存到服务器' },
     { title: '可选同步', desc: '需要多端使用时再开启同步' },
     { title: '一键清空', desc: '不想保留时可以随时清除记录' },
   ],
@@ -191,17 +191,17 @@ const privacyItemsMap = {
     { title: '一鍵清空', desc: '不想保留時可以隨時清除記錄' },
   ],
   en: [
-    { title: 'Local Storage', desc: 'Health data is saved on your own device first' },
+    { title: 'Online Storage', desc: 'Health data is securely saved online after sign-in' },
     { title: 'Optional Sync', desc: 'Turn on sync only when you need multiple devices' },
     { title: 'Clear Anytime', desc: 'Remove records whenever you no longer want to keep them' },
   ],
   ja: [
-    { title: 'ローカル保存', desc: '健康データはまず自分の端末に保存します' },
+    { title: 'オンライン保存', desc: 'ログイン後、健康データを安全にサーバーへ保存します' },
     { title: '任意の同期', desc: '複数端末で使う時だけ同期をオンにします' },
     { title: 'いつでも削除', desc: '残したくない記録はいつでも消去できます' },
   ],
   ko: [
-    { title: '로컬 저장', desc: '건강 데이터는 먼저 내 기기에 저장됩니다' },
+    { title: '온라인 저장', desc: '로그인 후 건강 데이터를 서버에 안전하게 저장합니다' },
     { title: '선택 동기화', desc: '여러 기기에서 필요할 때만 동기화합니다' },
     { title: '언제든 삭제', desc: '보관하고 싶지 않으면 언제든 기록을 지울 수 있습니다' },
   ],

@@ -11,7 +11,9 @@ onMounted(() => {
 <template>
   <section class="page web-app-redirect">
     <p>正在打开 Web 版...</p>
-    <a :href="webAppUrl">如果没有自动跳转，请点击这里</a>
+    <a :href="webAppUrl" target="_blank" rel="noopener noreferrer">
+      如果没有自动跳转，请点击这里
+    </a>
   </section>
 </template>
 

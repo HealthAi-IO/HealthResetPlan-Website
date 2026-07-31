@@ -143,7 +143,14 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <a href="https://app.jkcqplan.com/" class="header-action">{{ t('nav.webApp') }}</a>
+        <a
+          href="https://app.jkcqplan.com/"
+          class="header-action"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ t('nav.webApp') }}
+        </a>
 
         <button
           class="theme-toggle"
@@ -182,7 +189,15 @@ onUnmounted(() => {
           <RouterLink to="/download" @click="closeMobileMenu">{{ t('nav.download') }}</RouterLink>
           <RouterLink to="/privacy" @click="closeMobileMenu">{{ t('nav.privacy') }}</RouterLink>
           <RouterLink to="/terms" @click="closeMobileMenu">{{ t('nav.terms') }}</RouterLink>
-          <a href="https://app.jkcqplan.com/" class="mobile-cta" @click="closeMobileMenu">{{ t('nav.webApp') }}</a>
+          <a
+            href="https://app.jkcqplan.com/"
+            class="mobile-cta"
+            target="_blank"
+            rel="noopener noreferrer"
+            @click="closeMobileMenu"
+          >
+            {{ t('nav.webApp') }}
+          </a>
           <div class="mobile-lang">
             <button
               v-for="opt in localeOptions"

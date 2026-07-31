@@ -29,7 +29,7 @@ export const legalMessages: Record<string, {
         {
           title: '二、我们处理的信息',
           items: [
-            '本地使用：昵称、健康档案（如年龄、身高、体重、病史和用药信息）、健康指标、饮食运动计划、打卡记录、提醒、备注和用户主动选择的图片，仅保存在设备本地。',
+            '账号使用：昵称、健康档案（如年龄、身高、体重、病史和用药信息）、健康指标、饮食运动计划、打卡记录、提醒、备注和用户主动选择的图片，与登录账号绑定并在线保存。',
             '注册或登录账号：手机号、验证码或密码、账号标识、登录会话，以及与账号绑定的上述健康数据。我们用这些信息完成账号认证、数据保存和在线健康管理功能。',
             '报告识别：仅在你主动选择图片并确认上传后，上传检查报告图片至我们的服务端进行识别；识别结果须经你确认后才会写入健康记录。',
             '云端 AI：仅在你单独同意后，用于 AI 问诊、7 天计划生成、报告识别、餐食图片热量估算，以及皮肤、舌象和头皮图片分析。我们仅处理你为本次功能主动提交或确认发送的必要文本、健康摘要或图片；图片可能包含面部或健康相关信息，仅用于当次分析。',
@@ -47,8 +47,8 @@ export const legalMessages: Record<string, {
           title: '四、存储、同步与安全',
           items: [
             '健康业务功能需要登录账号，业务数据自动保存到服务器；退出后本机不保留健康业务数据。',
-            '注册账号后，数据会上传至我们的服务端用于同步和恢复。敏感健康字段在同步前采用 AES-256-GCM 加密，密钥由设备安全能力保存；传输使用 HTTPS。',
-            '账号存续期间，我们保存提供服务所必需的数据。你注销账号后，账号、会话、健康业务数据及关联文件会立即删除且不可恢复。',
+            '敏感健康字段由服务器使用 AES-256-GCM 加密后写入数据库，加密密钥仅由服务器安全环境配置提供；传输使用 HTTPS。',
+            '账号存续期间，我们保存提供服务所必需的数据。你注销账号后，账号、会话、健康业务数据及关联文件进入 30 天保留期，期满后删除。',
             '我们采取访问控制、加密传输和最小权限等措施保护信息，请妥善保管设备、账号、密码和验证码。',
             '数据库敏感数据由服务器使用 AES-256-GCM 加密存储，报告图片等文件加密后存入私有对象存储。使用云端 AI 时，必要内容会在受控服务端内存中短暂处理并经 HTTPS 转发。',
           ],
@@ -63,7 +63,7 @@ export const legalMessages: Record<string, {
         },
         {
           title: '七、你的权利',
-          paragraphs: ['你可以在应用内查看、修改、删除本地健康记录，管理提醒，退出登录，或在“我的 - 账号与数据安全”中注销账号。涉及访问、更正、删除、撤回同意、获取副本或投诉的请求，可按本政策第一部分的联系方式提出。撤回通知或相机权限不会影响此前已完成的处理，但相关功能将无法继续使用。'],
+          paragraphs: ['你可以在应用内查看、修改、删除账号健康记录，管理提醒，退出登录，或在“我的 - 账号与数据安全”中注销账号。涉及访问、更正、删除、撤回同意、获取副本或投诉的请求，可按本政策第一部分的联系方式提出。撤回通知或相机权限不会影响此前已完成的处理，但相关功能将无法继续使用。'],
         },
         {
           title: '八、未成年人和政策更新',
@@ -118,7 +118,7 @@ export const legalMessages: Record<string, {
         {
           title: '二、我們處理的資訊',
           items: [
-            '本機使用：暱稱、健康檔案（如年齡、身高、體重、病史和用藥資訊）、健康指標、飲食運動計劃、打卡記錄、提醒、備註和使用者主動選擇的圖片，僅儲存在裝置本機。',
+            '帳號使用：暱稱、健康檔案（如年齡、身高、體重、病史和用藥資訊）、健康指標、飲食運動計劃、打卡記錄、提醒、備註和使用者主動選擇的圖片，與登入帳號綁定並線上儲存。',
             '註冊或登入帳號：手機號碼、驗證碼或密碼、帳號識別碼、登入工作階段，以及你選擇儲存或同步的上述健康資料。我們使用這些資訊完成帳號驗證、雲端同步、資料復原和線上健康管理功能。',
             '報告辨識：僅在你主動選擇圖片並確認上傳後，才將檢查報告圖片上傳至我們的伺服器辨識；辨識結果須經你確認後才會寫入健康記錄。',
             '雲端 AI：僅在你單獨同意後，用於 AI 諮詢、7 天計劃生成、報告辨識、餐食圖片熱量估算，以及皮膚、舌象和頭皮圖片分析。我們僅處理你為本次功能主動提交或確認傳送的必要文字、健康摘要或圖片；圖片可能包含面部或健康相關資訊，僅用於當次分析。',
@@ -135,11 +135,11 @@ export const legalMessages: Record<string, {
         {
           title: '四、儲存、同步與安全',
           items: [
-            '未註冊帳號時，資料不會上傳伺服器，僅儲存在你的裝置中；解除安裝應用程式或清除應用程式資料可能導致本機資料無法復原。',
-            '註冊帳號後，資料會上傳至我們的伺服器用於同步和復原。敏感健康欄位在同步前採用 AES-256-GCM 加密，金鑰由裝置安全能力保存；傳輸使用 HTTPS。',
-            '帳號存續期間，我們儲存提供服務所必需的資料。你註銷帳號後，帳號、工作階段及雲端資料進入 30 天保留期；期滿後刪除。你可在保留期內使用原帳號憑證和助記詞復原。',
-            '我們採取存取控制、加密傳輸和最小權限等措施保護資訊，但請妥善保管裝置、帳號和助記詞。',
-            '雲端同步健康資料在上傳前採用 AES-256-GCM 加密；對未使用雲端 AI 的同步資料，平台伺服器、管理員和維運人員無法解密健康明文。使用雲端 AI 時，必要內容會在受控伺服器記憶體中短暫處理並經 HTTPS 轉送，不寫入明文資料庫、營運資料、稽核日誌或應用程式日誌。',
+            '健康業務功能需要登入帳號，業務資料自動儲存到伺服器；登出後本機不保留健康業務資料。',
+            '敏感健康欄位由伺服器使用 AES-256-GCM 加密後寫入資料庫，加密金鑰僅由伺服器安全環境設定提供；傳輸使用 HTTPS。',
+            '帳號存續期間，我們儲存提供服務所必需的資料。你註銷帳號後，帳號、工作階段及線上資料進入 30 天保留期，期滿後刪除。',
+            '我們採取存取控制、加密傳輸和最小權限等措施保護資訊，請妥善保管裝置、帳號、密碼和驗證碼。',
+            '資料庫敏感資料由伺服器使用 AES-256-GCM 加密儲存，報告圖片等檔案加密後存入私有物件儲存。使用雲端 AI 時，必要內容會在受控伺服器記憶體中短暫處理並經 HTTPS 轉送。',
           ],
         },
         {
@@ -148,11 +148,11 @@ export const legalMessages: Record<string, {
         },
         {
           title: '六、AI 單獨同意與撤回',
-          paragraphs: ['首次使用雲端 AI 前，我們會單獨說明處理目的、資料類型、服務商及風險並取得你的同意。涉及皮膚、舌象、頭皮等圖片時，使用者確認後才會傳送圖片。你可在「我的 - AI 資料處理授權」中撤回同意；撤回後 AI 功能停止，本機健康記錄和加密雲端同步不受影響。'],
+          paragraphs: ['首次使用雲端 AI 前，我們會單獨說明處理目的、資料類型、服務商及風險並取得你的同意。涉及皮膚、舌象、頭皮等圖片時，使用者確認後才會傳送圖片。你可在「我的 - AI 資料處理授權」中撤回同意；撤回後 AI 功能停止，帳號中的健康記錄不受影響。'],
         },
         {
           title: '七、你的權利',
-          paragraphs: ['你可以在應用程式內查看、修改、刪除本機健康記錄，管理提醒，登出，或在「我的 - 帳號與資料安全」中註銷帳號。涉及存取、更正、刪除、撤回同意、取得副本或投訴的請求，可依本政策第一部分的聯絡方式提出。撤回通知或相機權限不會影響此前已完成的處理，但相關功能將無法繼續使用。'],
+          paragraphs: ['你可以在應用程式內查看、修改、刪除帳號健康記錄，管理提醒，登出，或在「我的 - 帳號與資料安全」中註銷帳號。涉及存取、更正、刪除、撤回同意、取得副本或投訴的請求，可依本政策第一部分的聯絡方式提出。撤回通知或相機權限不會影響此前已完成的處理，但相關功能將無法繼續使用。'],
         },
         {
           title: '八、未成年人和政策更新',
@@ -173,8 +173,8 @@ export const legalMessages: Record<string, {
         {
           title: '二、帳號與資料',
           items: [
-            '你可選擇僅在本機使用，也可註冊帳號使用雲端同步和線上功能。請提供真實、合法的資訊並妥善保管帳號、密碼、驗證碼和助記詞。',
-            '你對輸入的健康、用藥、飲食和運動資訊的真實性負責。因裝置遺失、未備份助記詞或不當操作導致的資料損失，我們將在法律要求範圍內提供協助。',
+            '使用健康業務功能需要註冊或登入帳號。請提供真實、合法的資訊並妥善保管帳號、密碼和驗證碼。',
+            '你對輸入的健康、用藥、飲食和運動資訊的真實性負責。因帳號洩漏或不當操作導致的資料損失，我們將在法律要求範圍內提供協助。',
             '你可在應用程式內註銷帳號。註銷後，雲端資料保留 30 天以支援復原，期滿後刪除。',
           ],
         },
@@ -182,7 +182,7 @@ export const legalMessages: Record<string, {
           title: '三、健康提示與使用限制',
           paragraphs: [
             '本服務是日常健康管理輔助工具，不提供醫療診斷、處方、急救或治療服務，也不替代醫師、藥師或其他專業醫療人員的建議。AI 生成內容和報告辨識結果僅供參考。出現不適、異常指標、疾病診斷、特殊用藥或運動禁忌時，請及時諮詢專業醫療人員。',
-            '雲端 AI 功能須經使用者單獨同意後使用。使用者可隨時撤回授權；撤回後 AI 功能將停止，不影響本機記錄與加密雲端同步。',
+            '雲端 AI 功能須經使用者單獨同意後使用。使用者可隨時撤回授權；撤回後 AI 功能將停止，不影響帳號中的健康記錄。',
             '你不得利用本服務發布違法資訊、侵犯他人權益、攻擊系統、繞過安全措施，或將服務用於任何違反法律法規的用途。',
           ],
         },
@@ -207,7 +207,7 @@ export const legalMessages: Record<string, {
         {
           title: '2. Information We Process',
           items: [
-            'Local use: Your nickname, health profile (such as age, height, weight, medical history, and medication information), health metrics, diet and exercise plans, check-ins, reminders, notes, and images you select are stored only on your device.',
+            'Account use: Your nickname, health profile, health metrics, plans, check-ins, reminders, notes, and selected images are linked to your signed-in account and stored online.',
             'Registration or sign-in: Your mobile number, verification code or password, account identifier, sign-in session, and the health data above that you choose to save or sync. We use this information for account authentication, cloud sync, data recovery, and online health management.',
             'Report recognition: We upload a medical report image to our server for recognition only after you select it and confirm the upload. Recognition results are added to your health records only after you confirm them.',
             'Cloud AI: With your separate consent, cloud AI may be used for AI consultations, seven-day plan generation, report recognition, meal calorie estimates, and analysis of skin, tongue, and scalp images. We process only the necessary text, health summary, or images that you submit or confirm for that request. Images may contain facial or health-related information and are used only for that analysis.',
@@ -224,11 +224,11 @@ export const legalMessages: Record<string, {
         {
           title: '4. Storage, Sync, and Security',
           items: [
-            'Without a registered account, data is not uploaded to our servers and remains on your device. Uninstalling the app or clearing app data may make local data unrecoverable.',
-            'After registration, data is uploaded to our servers for sync and recovery. Sensitive health fields are encrypted with AES-256-GCM before sync, keys are protected by device security capabilities, and data is transmitted over HTTPS.',
-            'While your account is active, we retain data necessary to provide the service. After account deletion, the account, sessions, and cloud data enter a 30-day retention period and are then deleted. During that period, you may restore the account using the original credentials and recovery phrase.',
-            'We protect information using access controls, encrypted transmission, and least-privilege access. Please also protect your device, account, and recovery phrase.',
-            'Cloud-synced health data is encrypted with AES-256-GCM before upload. For synced data not used with cloud AI, our servers, administrators, and operations staff cannot decrypt health data in plaintext. When cloud AI is used, required content is processed briefly in controlled server memory and forwarded over HTTPS; it is not written to plaintext databases, operational data, audit logs, or application logs.',
+            'Health features require sign-in. Business data is saved online automatically, and health business data is not retained on the device after sign-out.',
+            'The server encrypts sensitive health fields with AES-256-GCM before database storage. Encryption keys are supplied only through secure server configuration, and transmission uses HTTPS.',
+            'While your account is active, we retain data necessary to provide the service. After account deletion, account, session, and online data enter a 30-day retention period and are then deleted.',
+            'We protect information using access controls, encrypted transmission, and least-privilege access. Please protect your device, account, password, and verification codes.',
+            'Sensitive database data is encrypted server-side with AES-256-GCM, and files such as report images are encrypted in private object storage. Cloud AI content is processed briefly in controlled server memory and forwarded over HTTPS.',
           ],
         },
         {
@@ -237,11 +237,11 @@ export const legalMessages: Record<string, {
         },
         {
           title: '6. Separate Consent for AI and Withdrawal',
-          paragraphs: ['Before you first use cloud AI, we separately explain the purpose, data types, provider, and risks, and obtain your consent. Skin, tongue, scalp, and similar images are sent only after you confirm. You may withdraw consent under “Me - AI Data Processing Authorization.” Cloud AI stops after withdrawal; local health records and encrypted cloud sync are unaffected.'],
+          paragraphs: ['Before you first use cloud AI, we separately explain the purpose, data types, provider, and risks, and obtain your consent. Skin, tongue, scalp, and similar images are sent only after you confirm. You may withdraw consent under “Me - AI Data Processing Authorization.” Cloud AI stops after withdrawal; health records in your account are unaffected.'],
         },
         {
           title: '7. Your Rights',
-          paragraphs: ['In the app, you may view, change, or delete local health records, manage reminders, sign out, or delete your account under “Me - Account and Data Security.” To request access, correction, deletion, withdrawal of consent, a copy of your data, or to make a complaint, use the contact details in Section 1. Revoking notification or camera permission does not affect completed processing, but the related feature will no longer work.'],
+          paragraphs: ['In the app, you may view, change, or delete account health records, manage reminders, sign out, or delete your account under “Me - Account and Data Security.” To request access, correction, deletion, withdrawal of consent, a copy of your data, or to make a complaint, use the contact details in Section 1. Revoking notification or camera permission does not affect completed processing, but the related feature will no longer work.'],
         },
         {
           title: '8. Children and Policy Updates',
@@ -262,8 +262,8 @@ export const legalMessages: Record<string, {
         {
           title: '2. Accounts and Data',
           items: [
-            'You may use the service locally or register for cloud sync and online features. Provide accurate, lawful information and keep your account, password, verification codes, and recovery phrase secure.',
-            'You are responsible for the accuracy of the health, medication, diet, and exercise information you enter. If data is lost because a device is lost, a recovery phrase was not backed up, or the service was used improperly, we will assist as required by law.',
+            'Health features require registration or sign-in. Provide accurate, lawful information and keep your account, password, and verification codes secure.',
+            'You are responsible for the accuracy of the health, medication, diet, and exercise information you enter. If data is lost because an account is compromised or the service is used improperly, we will assist as required by law.',
             'You may delete your account in the app. After deletion, cloud data is retained for 30 days to support recovery and is then deleted.',
           ],
         },
@@ -271,7 +271,7 @@ export const legalMessages: Record<string, {
           title: '3. Health Notice and Usage Restrictions',
           paragraphs: [
             'The service is a daily health management aid. It does not provide medical diagnosis, prescriptions, emergency care, or treatment, and does not replace advice from physicians, pharmacists, or other healthcare professionals. AI-generated content and report recognition results are for reference only. Seek professional medical advice for discomfort, abnormal readings, diagnosed conditions, special medications, or exercise contraindications.',
-            'Cloud AI features require your separate consent. You may withdraw authorization at any time. Cloud AI will stop after withdrawal, without affecting local records or encrypted cloud sync.',
+            'Cloud AI features require your separate consent. You may withdraw authorization at any time. Cloud AI will stop after withdrawal without affecting health records in your account.',
             'You must not use the service to publish illegal information, infringe others’ rights, attack systems, bypass security measures, or for any purpose that violates applicable law.',
           ],
         },
@@ -296,7 +296,7 @@ export const legalMessages: Record<string, {
         {
           title: '2. 取り扱う情報',
           items: [
-            'ローカル利用：ニックネーム、健康プロフィール（年齢、身長、体重、病歴、服薬情報など）、健康指標、食事・運動計画、チェックイン、リマインダー、メモ、およびユーザーが選択した画像は、端末内にのみ保存されます。',
+            'アカウント利用：健康プロフィール、健康指標、計画、チェックイン、リマインダー、メモ、選択した画像は、ログイン中のアカウントに紐づけてオンライン保存されます。',
             '登録またはログイン：携帯電話番号、認証コードまたはパスワード、アカウント識別子、ログインセッション、および保存・同期を選択した上記健康データ。これらはアカウント認証、クラウド同期、データ復元、オンライン健康管理に使用します。',
             'レポート認識：ユーザーが画像を選択してアップロードを確認した場合に限り、検査レポート画像をサーバーへ送信します。認識結果はユーザーの確認後にのみ健康記録へ保存されます。',
             'クラウド AI：個別の同意を得た場合に限り、AI 相談、7日間計画の生成、レポート認識、食事画像のカロリー推定、皮膚・舌・頭皮画像の分析に使用します。当該機能のためにユーザーが送信または確認した必要なテキスト、健康概要、画像のみを処理します。画像に顔や健康関連情報が含まれる場合も、当該分析にのみ使用します。',
@@ -313,11 +313,11 @@ export const legalMessages: Record<string, {
         {
           title: '4. 保存、同期、セキュリティ',
           items: [
-            '未登録の場合、データはサーバーへ送信されず端末内にのみ保存されます。アプリの削除やデータ消去により、ローカルデータを復元できなくなる場合があります。',
-            '登録後、同期と復元のためデータがサーバーへ送信されます。機微な健康項目は同期前に AES-256-GCM で暗号化され、鍵は端末のセキュリティ機能で保護されます。通信には HTTPS を使用します。',
-            'アカウントの利用中は、サービス提供に必要なデータを保持します。アカウント削除後、アカウント、セッション、クラウドデータは30日間保持され、その後削除されます。保持期間中は元の認証情報とリカバリーフレーズで復元できます。',
-            'アクセス制御、暗号化通信、最小権限などの措置で情報を保護します。端末、アカウント、リカバリーフレーズも適切に管理してください。',
-            'クラウド同期する健康データは送信前に AES-256-GCM で暗号化されます。クラウド AI に使用しない同期データについては、サーバー、管理者、運用担当者は健康情報の平文を復号できません。クラウド AI の利用時、必要な内容は管理されたサーバーメモリで一時的に処理され、HTTPS で転送されます。平文データベース、運用データ、監査ログ、アプリケーションログには書き込みません。',
+            '健康機能の利用にはログインが必要です。業務データは自動的にオンライン保存され、ログアウト後は端末に健康業務データを保持しません。',
+            '機微な健康項目は、データベース保存前にサーバーが AES-256-GCM で暗号化します。鍵は安全なサーバー設定からのみ提供され、通信には HTTPS を使用します。',
+            'アカウントの利用中はサービス提供に必要なデータを保持します。アカウント削除後、アカウント、セッション、オンラインデータは30日間保持され、その後削除されます。',
+            'アクセス制御、暗号化通信、最小権限などの措置で情報を保護します。端末、アカウント、パスワード、認証コードも適切に管理してください。',
+            'データベースの機密情報はサーバー側で AES-256-GCM 暗号化され、レポート画像などは暗号化して非公開オブジェクトストレージに保存されます。',
           ],
         },
         {
@@ -326,11 +326,11 @@ export const legalMessages: Record<string, {
         },
         {
           title: '6. AI への個別同意と撤回',
-          paragraphs: ['クラウド AI を初めて使用する前に、処理目的、データ種類、提供者、リスクを個別に説明し、同意を取得します。皮膚、舌、頭皮などの画像は確認後にのみ送信します。「マイページ - AI データ処理の承認」から同意を撤回できます。撤回後は AI 機能が停止しますが、ローカル健康記録と暗号化クラウド同期には影響しません。'],
+          paragraphs: ['クラウド AI を初めて使用する前に、処理目的、データ種類、提供者、リスクを個別に説明し、同意を取得します。皮膚、舌、頭皮などの画像は確認後にのみ送信します。同意撤回後は AI 機能が停止しますが、アカウント内の健康記録には影響しません。'],
         },
         {
           title: '7. ユーザーの権利',
-          paragraphs: ['アプリ内でローカル健康記録の閲覧、変更、削除、リマインダー管理、ログアウトができ、「マイページ - アカウントとデータのセキュリティ」からアカウントを削除できます。アクセス、訂正、削除、同意撤回、データの写し、苦情に関する請求は、第1項の連絡先へお申し出ください。通知またはカメラ権限の撤回は完了済みの処理に影響しませんが、関連機能は使用できなくなります。'],
+          paragraphs: ['アプリ内でアカウントの健康記録を閲覧、変更、削除し、リマインダー管理やログアウトができます。「マイページ - アカウントとデータのセキュリティ」からアカウントを削除できます。'],
         },
         {
           title: '8. 未成年者およびポリシーの更新',
@@ -351,7 +351,7 @@ export const legalMessages: Record<string, {
         {
           title: '2. アカウントとデータ',
           items: [
-            'ローカルのみで利用するか、登録してクラウド同期とオンライン機能を利用できます。正確かつ適法な情報を提供し、アカウント、パスワード、認証コード、リカバリーフレーズを安全に管理してください。',
+            '健康機能の利用には登録またはログインが必要です。正確かつ適法な情報を提供し、アカウント、パスワード、認証コードを安全に管理してください。',
             '入力する健康、服薬、食事、運動情報の正確性はユーザーの責任です。端末紛失、リカバリーフレーズの未保存、不適切な操作によるデータ損失については、法令で求められる範囲で支援します。',
             'アプリ内でアカウントを削除できます。削除後、復元対応のためクラウドデータを30日間保持し、その後削除します。',
           ],
@@ -360,7 +360,7 @@ export const legalMessages: Record<string, {
           title: '3. 健康上の注意と利用制限',
           paragraphs: [
             '本サービスは日常の健康管理を支援するもので、医療診断、処方、救急、治療を提供せず、医師、薬剤師、その他の医療専門家の助言に代わるものではありません。AI 生成内容とレポート認識結果は参考情報です。不調、異常値、診断済み疾患、特別な投薬、運動禁忌がある場合は、速やかに医療専門家へ相談してください。',
-            'クラウド AI 機能には個別の同意が必要です。承認はいつでも撤回でき、撤回後は AI 機能が停止しますが、ローカル記録と暗号化クラウド同期には影響しません。',
+            'クラウド AI 機能には個別の同意が必要です。承認はいつでも撤回でき、撤回後は AI 機能が停止しますが、アカウント内の健康記録には影響しません。',
             '違法情報の公開、他者の権利侵害、システム攻撃、セキュリティ対策の回避、その他法令に反する目的で本サービスを利用してはなりません。',
           ],
         },
@@ -385,7 +385,7 @@ export const legalMessages: Record<string, {
         {
           title: '2. 처리하는 정보',
           items: [
-            '로컬 사용: 닉네임, 건강 프로필(나이, 키, 체중, 병력, 복약 정보 등), 건강 지표, 식단·운동 계획, 체크인, 알림, 메모 및 사용자가 선택한 이미지는 기기에만 저장됩니다.',
+            '계정 사용: 건강 프로필, 건강 지표, 계획, 체크인, 알림, 메모 및 선택한 이미지는 로그인 계정에 연결되어 온라인으로 저장됩니다.',
             '가입 또는 로그인: 휴대전화 번호, 인증 코드 또는 비밀번호, 계정 식별자, 로그인 세션 및 사용자가 저장하거나 동기화하기로 선택한 위 건강 데이터. 계정 인증, 클라우드 동기화, 데이터 복구 및 온라인 건강 관리에 사용합니다.',
             '보고서 인식: 사용자가 이미지를 선택하고 업로드를 확인한 경우에만 검사 보고서 이미지를 서버로 전송해 인식합니다. 인식 결과는 사용자가 확인한 후에만 건강 기록에 저장됩니다.',
             '클라우드 AI: 별도 동의를 받은 경우에만 AI 상담, 7일 계획 생성, 보고서 인식, 음식 이미지 열량 추정, 피부·혀·두피 이미지 분석에 사용합니다. 해당 기능을 위해 사용자가 제출하거나 전송을 확인한 필수 텍스트, 건강 요약 또는 이미지만 처리합니다. 이미지에 얼굴이나 건강 관련 정보가 포함될 수 있으며 해당 분석에만 사용됩니다.',
@@ -402,11 +402,11 @@ export const legalMessages: Record<string, {
         {
           title: '4. 저장, 동기화 및 보안',
           items: [
-            '계정을 등록하지 않으면 데이터는 서버에 업로드되지 않고 기기에만 저장됩니다. 앱을 삭제하거나 앱 데이터를 지우면 로컬 데이터를 복구하지 못할 수 있습니다.',
-            '가입 후에는 동기화와 복구를 위해 데이터가 서버로 전송됩니다. 민감한 건강 필드는 동기화 전에 AES-256-GCM으로 암호화되고 키는 기기 보안 기능으로 보호되며, 전송에는 HTTPS를 사용합니다.',
-            '계정이 활성 상태인 동안 서비스 제공에 필요한 데이터를 보관합니다. 계정 삭제 후 계정, 세션 및 클라우드 데이터는 30일간 보관된 뒤 삭제됩니다. 보관 기간에는 기존 계정 자격 증명과 복구 문구로 복원할 수 있습니다.',
-            '접근 제어, 암호화 전송, 최소 권한 등의 조치로 정보를 보호합니다. 기기, 계정 및 복구 문구도 안전하게 관리해 주세요.',
-            '클라우드 동기화 건강 데이터는 업로드 전에 AES-256-GCM으로 암호화됩니다. 클라우드 AI에 사용되지 않은 동기화 데이터는 서버, 관리자 및 운영 담당자가 평문 건강 정보를 복호화할 수 없습니다. 클라우드 AI 사용 시 필요한 내용은 통제된 서버 메모리에서 잠시 처리되고 HTTPS로 전달되며, 평문 데이터베이스, 운영 데이터, 감사 로그 또는 애플리케이션 로그에 기록되지 않습니다.',
+            '건강 기능은 로그인이 필요합니다. 업무 데이터는 온라인에 자동 저장되며 로그아웃 후 기기에 건강 업무 데이터를 보관하지 않습니다.',
+            '민감한 건강 필드는 데이터베이스 저장 전에 서버가 AES-256-GCM으로 암호화합니다. 키는 안전한 서버 설정에서만 제공되며 전송에는 HTTPS를 사용합니다.',
+            '계정이 활성 상태인 동안 서비스 제공에 필요한 데이터를 보관합니다. 계정 삭제 후 계정, 세션 및 온라인 데이터는 30일간 보관된 뒤 삭제됩니다.',
+            '접근 제어, 암호화 전송, 최소 권한 등의 조치로 정보를 보호합니다. 기기, 계정, 비밀번호와 인증 코드도 안전하게 관리해 주세요.',
+            '데이터베이스의 민감한 내용은 서버에서 AES-256-GCM으로 암호화되고 보고서 이미지 등 파일은 암호화하여 비공개 객체 저장소에 보관됩니다.',
           ],
         },
         {
@@ -415,11 +415,11 @@ export const legalMessages: Record<string, {
         },
         {
           title: '6. AI 별도 동의 및 철회',
-          paragraphs: ['클라우드 AI를 처음 사용하기 전에 처리 목적, 데이터 유형, 제공업체 및 위험을 별도로 설명하고 동의를 받습니다. 피부, 혀, 두피 등의 이미지는 사용자가 확인한 후에만 전송됩니다. “내 정보 - AI 데이터 처리 권한”에서 동의를 철회할 수 있습니다. 철회 후 AI 기능은 중지되며 로컬 건강 기록과 암호화된 클라우드 동기화에는 영향을 주지 않습니다.'],
+          paragraphs: ['클라우드 AI를 처음 사용하기 전에 처리 목적, 데이터 유형, 제공업체 및 위험을 별도로 설명하고 동의를 받습니다. 철회 후 AI 기능은 중지되지만 계정의 건강 기록에는 영향을 주지 않습니다.'],
         },
         {
           title: '7. 사용자의 권리',
-          paragraphs: ['앱에서 로컬 건강 기록을 조회·수정·삭제하고 알림을 관리하거나 로그아웃할 수 있으며, “내 정보 - 계정 및 데이터 보안”에서 계정을 삭제할 수 있습니다. 접근, 정정, 삭제, 동의 철회, 사본 제공 또는 불만에 관한 요청은 제1항의 연락처로 제출해 주세요. 알림 또는 카메라 권한 철회는 이미 완료된 처리에 영향을 주지 않지만 관련 기능은 더 이상 사용할 수 없습니다.'],
+          paragraphs: ['앱에서 계정 건강 기록을 조회·수정·삭제하고 알림을 관리하거나 로그아웃할 수 있으며, “내 정보 - 계정 및 데이터 보안”에서 계정을 삭제할 수 있습니다.'],
         },
         {
           title: '8. 아동 및 방침 변경',
@@ -440,7 +440,7 @@ export const legalMessages: Record<string, {
         {
           title: '2. 계정 및 데이터',
           items: [
-            '로컬로만 사용하거나 가입하여 클라우드 동기화와 온라인 기능을 사용할 수 있습니다. 정확하고 적법한 정보를 제공하고 계정, 비밀번호, 인증 코드 및 복구 문구를 안전하게 관리해 주세요.',
+            '건강 기능은 가입 또는 로그인이 필요합니다. 정확하고 적법한 정보를 제공하고 계정, 비밀번호 및 인증 코드를 안전하게 관리해 주세요.',
             '입력한 건강, 복약, 식단 및 운동 정보의 정확성은 사용자에게 책임이 있습니다. 기기 분실, 복구 문구 미백업 또는 부적절한 조작으로 데이터가 손실된 경우 법률이 요구하는 범위에서 지원합니다.',
             '앱에서 계정을 삭제할 수 있습니다. 삭제 후 복구 지원을 위해 클라우드 데이터를 30일간 보관한 뒤 삭제합니다.',
           ],
@@ -449,7 +449,7 @@ export const legalMessages: Record<string, {
           title: '3. 건강 고지 및 이용 제한',
           paragraphs: [
             '본 서비스는 일상 건강 관리 보조 도구이며 의료 진단, 처방, 응급 처치 또는 치료를 제공하지 않고 의사, 약사 또는 기타 의료 전문가의 조언을 대체하지 않습니다. AI 생성 콘텐츠와 보고서 인식 결과는 참고용입니다. 불편함, 비정상 지표, 진단된 질환, 특수 약물 또는 운동 금기가 있으면 즉시 의료 전문가와 상담해 주세요.',
-            '클라우드 AI 기능은 사용자의 별도 동의가 필요합니다. 언제든지 권한을 철회할 수 있으며, 철회 후 AI 기능은 중지되지만 로컬 기록과 암호화된 클라우드 동기화에는 영향을 주지 않습니다.',
+            '클라우드 AI 기능은 사용자의 별도 동의가 필요합니다. 언제든지 권한을 철회할 수 있으며 철회 후 AI 기능은 중지되지만 계정의 건강 기록에는 영향을 주지 않습니다.',
             '불법 정보 게시, 타인의 권리 침해, 시스템 공격, 보안 조치 우회 또는 법률을 위반하는 목적으로 서비스를 이용해서는 안 됩니다.',
           ],
         },

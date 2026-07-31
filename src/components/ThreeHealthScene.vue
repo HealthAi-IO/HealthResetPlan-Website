@@ -575,7 +575,7 @@ onUnmounted(() => {
     </div>
     <div v-if="variant === 'home'" class="metric-panel panel-right">
       <span>AES-256-GCM</span>
-      <strong>Local-first</strong>
+      <strong>Online data</strong>
       <small>server stores ciphertext only</small>
     </div>
   </div>

@@ -148,7 +148,14 @@ const chartBars = [42, 58, 51, 76, 64, 82, 73];
     </div>
     <div class="cta-actions">
       <RouterLink to="/download" class="btn btn-primary">{{ t('home.ctaDownload') }}</RouterLink>
-      <a href="https://app.jkcqplan.com/" class="btn btn-secondary">{{ t('home.ctaWeb') }}</a>
+      <a
+        href="https://app.jkcqplan.com/"
+        class="btn btn-secondary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ t('home.ctaWeb') }}
+      </a>
     </div>
   </section>
 </template>

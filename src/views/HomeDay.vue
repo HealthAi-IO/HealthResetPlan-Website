@@ -127,7 +127,14 @@ const downloadCards = computed(() => dayHomeMessages.downloadCardsMap[getDayLoca
         </div>
         <div class="download-actions">
           <RouterLink to="/download" class="btn btn-primary">{{ copy.downloadNow }}</RouterLink>
-          <a href="https://app.jkcqplan.com/" class="btn btn-secondary">{{ copy.webApp }}</a>
+          <a
+            href="https://app.jkcqplan.com/"
+            class="btn btn-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ copy.webApp }}
+          </a>
         </div>
       </div>
     </section>

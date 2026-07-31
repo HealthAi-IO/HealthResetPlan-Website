@@ -19,7 +19,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/app-icon-32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/app-icon-192.png" />
-    <link rel="preload" href="/FinalBaseMesh.obj" as="fetch" crossorigin />
     <style>
       *,
       *::before,
@@ -119,16 +118,6 @@
 
     <div id="app"></div>
 
-    <script>
-      window.removeAppSkeleton = function () {
-        var sk = document.getElementById('app-skeleton');
-        if (!sk) return;
-        sk.classList.add('fade-out');
-        setTimeout(function () {
-          if (sk) sk.remove();
-        }, 400);
-      };
-    </script>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

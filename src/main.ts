@@ -3,14 +3,7 @@ import { createPinia } from 'pinia';
 import App from './App.vue';
 import router from './router';
 import { i18n } from './i18n';
-import '@fontsource-variable/noto-sans-sc';
 import './assets/styles.css';
-
-declare global {
-  interface Window {
-    removeAppSkeleton?: () => void;
-  }
-}
 
 if ('scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual';
@@ -25,8 +18,9 @@ app.mount('#app');
 router.isReady().then(() => {
   window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
   requestAnimationFrame(() => {
-    if (typeof window.removeAppSkeleton === 'function') {
-      window.removeAppSkeleton();
-    }
+    const skeleton = document.getElementById('app-skeleton');
+    if (!skeleton) return;
+    skeleton.classList.add('fade-out');
+    setTimeout(() => skeleton.remove(), 400);
   });
 });

@@ -21,26 +21,44 @@ interface PlatformCard {
   available: boolean;
   downloadUrl?: string;
   downloadLabel?: string;
+  secondaryDownloadUrl?: string;
+  secondaryDownloadLabel?: string;
+  downloadHint?: string;
+  openInNewTab?: boolean;
 }
 
 const androidRelease = ref<ReleaseInfo | null>(null);
 const windowsRelease = ref<ReleaseInfo | null>(null);
+const webRelease = ref<ReleaseInfo | null>(null);
 const androidReleaseLoading = ref(true);
 const windowsReleaseLoading = ref(true);
+const webReleaseLoading = ref(true);
 
 onMounted(async () => {
-  const [android, windows] = await Promise.all([
+  const [android, windows, web] = await Promise.all([
     http
       .get<ReleaseInfo>('/releases/latest?platform=android&channel=official')
       .catch(() => null),
     http
       .get<ReleaseInfo>('/releases/latest?platform=windows&channel=official')
       .catch(() => null),
+    http
+      .get<ReleaseInfo>('/releases/latest?platform=web&channel=official')
+      .catch(() => null),
   ]);
   androidRelease.value = android;
   windowsRelease.value = windows;
+  webRelease.value = web;
   androidReleaseLoading.value = false;
   windowsReleaseLoading.value = false;
+  webReleaseLoading.value = false;
+});
+
+const windowsPortableUrl = computed(() => {
+  const version = windowsRelease.value?.version;
+  if (!version) return undefined;
+  const filename = encodeURIComponent(`健康重启计划-Windows-${version}.zip`);
+  return `https://jkcqplan.com/downloads/windows/${filename}`;
 });
 
 const platforms = computed<PlatformCard[]>(() => [
@@ -76,6 +94,9 @@ const platforms = computed<PlatformCard[]>(() => [
     available: windowsRelease.value?.available === true,
     downloadUrl: windowsRelease.value?.downloadUrl,
     downloadLabel: t('download.downloadWindows'),
+    secondaryDownloadUrl: windowsPortableUrl.value,
+    secondaryDownloadLabel: t('download.downloadWindowsPortable'),
+    downloadHint: t('download.windowsPath'),
   },
   {
     name: t('download.macos'),
@@ -88,8 +109,15 @@ const platforms = computed<PlatformCard[]>(() => [
     name: t('download.web'),
     code: 'Web',
     desc: t('download.webDesc'),
-    status: t('download.webStatus'),
-    available: true,
+    status: webReleaseLoading.value
+      ? t('download.loading')
+      : webRelease.value?.available
+        ? `v${webRelease.value.version}`
+        : t('download.webStatus'),
+    available: webRelease.value?.available === true,
+    downloadUrl: webRelease.value?.downloadUrl,
+    downloadLabel: t('download.openWeb'),
+    openInNewTab: true,
   },
   {
     name: t('download.mp'),
@@ -154,13 +182,24 @@ const releaseSteps = computed(() => [
             <h2>{{ platform.name }}</h2>
             <p>{{ platform.desc }}</p>
           </div>
-          <a
-            v-if="platform.downloadUrl"
-            class="btn btn-primary download-button"
-            :href="platform.downloadUrl"
-          >
-            {{ platform.downloadLabel }}
-          </a>
+          <div v-if="platform.downloadUrl" class="download-actions">
+            <a
+              class="btn btn-primary"
+              :href="platform.downloadUrl"
+              :target="platform.openInNewTab ? '_blank' : undefined"
+              :rel="platform.openInNewTab ? 'noopener noreferrer' : undefined"
+            >
+              {{ platform.downloadLabel }}
+            </a>
+            <a
+              v-if="platform.secondaryDownloadUrl"
+              class="btn btn-secondary"
+              :href="platform.secondaryDownloadUrl"
+            >
+              {{ platform.secondaryDownloadLabel }}
+            </a>
+            <small v-if="platform.downloadHint">{{ platform.downloadHint }}</small>
+          </div>
           <span class="status-pill" :class="{ available: platform.available }">
             {{ platform.status }}
           </span>
@@ -195,10 +234,17 @@ const releaseSteps = computed(() => [
   max-width: 620px;
 }
 
-.download-button {
+.download-actions {
   grid-column: 1 / -1;
-  justify-self: flex-start;
-  white-space: nowrap;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+
+  small {
+    flex-basis: 100%;
+    color: var(--text-muted);
+  }
 }
 
 .download-hero-art {
