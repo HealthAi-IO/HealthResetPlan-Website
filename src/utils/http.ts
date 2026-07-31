@@ -8,11 +8,19 @@ interface ApiResponse<T> {
 }
 
 async function get<T>(path: string): Promise<T> {
-  const response = await fetch(`${apiBaseUrl}${path}`, {
-    headers: {
-      Accept: 'application/json',
-    },
-  });
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 8000);
+  let response: Response;
+  try {
+    response = await fetch(`${apiBaseUrl}${path}`, {
+      headers: {
+        Accept: 'application/json',
+      },
+      signal: controller.signal,
+    });
+  } finally {
+    window.clearTimeout(timeout);
+  }
   const body = (await response.json()) as ApiResponse<T>;
   if (!response.ok || body.code !== 0) {
     throw new Error(body.message || body.msg || '请求失败');

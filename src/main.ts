@@ -15,7 +15,11 @@ app.use(router);
 app.use(i18n);
 app.mount('#app');
 
-router.isReady().then(() => {
+let skeletonHidden = false;
+
+function hideSkeleton() {
+  if (skeletonHidden) return;
+  skeletonHidden = true;
   window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
   requestAnimationFrame(() => {
     const skeleton = document.getElementById('app-skeleton');
@@ -23,4 +27,7 @@ router.isReady().then(() => {
     skeleton.classList.add('fade-out');
     setTimeout(() => skeleton.remove(), 400);
   });
-});
+}
+
+router.isReady().then(hideSkeleton, hideSkeleton);
+window.setTimeout(hideSkeleton, 4000);
